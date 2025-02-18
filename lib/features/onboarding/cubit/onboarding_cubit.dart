@@ -15,5 +15,5 @@ class OnboardingCubit extends Cubit<int> {
     }
   }
 
-  void updatePage({required int index}) => emit(index);
+  void updatePage(int index) => emit(index);
 }
