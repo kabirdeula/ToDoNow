@@ -15,5 +15,14 @@ class OnboardingCubit extends Cubit<int> {
     }
   }
 
+  void previous() {
+    if (state > 0) {
+      pageController.previousPage(
+        duration: Duration(milliseconds: 500),
+        curve: Curves.ease,
+      );
+    }
+  }
+
   void updatePage(int index) => emit(index);
 }

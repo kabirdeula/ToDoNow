@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'package:to_do_now/core/constants/constants.dart';
-import 'package:to_do_now/core/di/di.dart';
 import 'package:to_do_now/core/widgets/widgets.dart';
 import 'package:to_do_now/features/onboarding/onboarding.dart';
 
@@ -12,7 +10,7 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = sl<OnboardingCubit>();
+    final cubit = context.read<OnboardingCubit>();
     final onboardingItem = ListStrings.onboardingStrings;
 
     return Scaffold(
@@ -25,56 +23,30 @@ class OnboardingScreen extends StatelessWidget {
                 controller: cubit.pageController,
                 onPageChanged: cubit.updatePage,
                 itemCount: onboardingItem.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return OnboardingBody(
-                    image: onboardingItem[index].image,
-                    title: onboardingItem[index].title,
-                    description: onboardingItem[index].description,
-                  );
-                },
-              ),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                left: 0,
-                child: Column(
-                  spacing: 20,
-                  children: [
-                    BlocBuilder<OnboardingCubit, int>(
-                      builder: (context, state) {
-                        return SmoothPageIndicator(
-                          controller: cubit.pageController,
-                          count: onboardingItem.length,
-                          effect: ExpandingDotsEffect(dotHeight: 8),
-                        );
-                      },
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomTextButton(label: 'back'),
-                        BlocBuilder<OnboardingCubit, int>(
-                          builder: (context, state) {
-                            return CustomElevatedButton(
-                              label: state == onboardingItem.length - 1
-                                  ? 'Get Started'
-                                  : 'Next',
-                              onPressed: () =>
-                                  state == onboardingItem.length - 1
-                                      ? null
-                                      : cubit.nextPage(onboardingItem.length),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
+                itemBuilder: (_, index) => OnboardingBody(
+                  image: onboardingItem[index].image,
+                  title: onboardingItem[index].title,
+                  description: onboardingItem[index].description,
                 ),
               ),
               Positioned(
                 top: 0,
                 left: 0,
                 child: CustomTextButton(label: 'skip'),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                left: 0,
+                child: BlocBuilder<OnboardingCubit, int>(
+                  builder: (context, state) {
+                    return OnboardingNavigation(
+                      cubit: cubit,
+                      totalPage: onboardingItem.length,
+                      currentPage: state,
+                    );
+                  },
+                ),
               ),
             ],
           ),
