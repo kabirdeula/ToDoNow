@@ -11,25 +11,7 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = sl<OnboardingCubit>();
-    List pages = [
-      {
-        'title': 'Manage your tasks',
-        'image': AssetPaths.onboarding1,
-        'description': 'You can easily manage all of your daily tasks'
-      },
-      {
-        'title': 'Create daily routine',
-        'image': AssetPaths.onboarding2,
-        'description':
-            'You can create your personalized routine to stay productive'
-      },
-      {
-        'title': 'Organize your tasks',
-        'image': AssetPaths.onboarding3,
-        'description':
-            'You can organize your daily tasks by adding your tasks into separate categories'
-      },
-    ];
+    final onboardingItem = ListStrings.onboardingStrings;
 
     return Scaffold(
       body: SafeArea(
@@ -41,11 +23,11 @@ class OnboardingScreen extends StatelessWidget {
                 controller: cubit.pageController,
                 onPageChanged: cubit.updatePage,
                 children: List.generate(
-                  pages.length,
+                  onboardingItem.length,
                   (index) => OnboardingBody(
-                    image: pages[index]['image'],
-                    title: pages[index]['title'],
-                    description: pages[index]['description'],
+                    image: onboardingItem[index].image,
+                    title: onboardingItem[index].title,
+                    description: onboardingItem[index].description,
                   ),
                 ),
               ),
@@ -60,7 +42,7 @@ class OnboardingScreen extends StatelessWidget {
                       builder: (context, state) {
                         return SmoothPageIndicator(
                           controller: cubit.pageController,
-                          count: pages.length,
+                          count: onboardingItem.length,
                           effect: ExpandingDotsEffect(dotHeight: 8),
                         );
                       },
@@ -87,11 +69,12 @@ class OnboardingScreen extends StatelessWidget {
                               ),
                               backgroundColor: Color(0xFF0F68EE),
                             ),
-                            onPressed: () => state == pages.length - 1
+                            onPressed: () => state == onboardingItem.length - 1
                                 ? null
-                                : cubit.nextPage(totalPages: pages.length),
+                                : cubit.nextPage(
+                                    totalPages: onboardingItem.length),
                             child: Text(
-                              state == pages.length - 1
+                              state == onboardingItem.length - 1
                                   ? 'Get Started'
                                   : 'Next',
                               style: TextStyle(
