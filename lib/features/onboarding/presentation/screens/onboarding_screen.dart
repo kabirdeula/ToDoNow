@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:to_do_now/core/constants/constants.dart';
 import 'package:to_do_now/core/di/di.dart';
 import 'package:to_do_now/features/onboarding/onboarding.dart';
 
@@ -11,9 +12,23 @@ class OnboardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = sl<OnboardingCubit>();
     List pages = [
-      {'title': 'Test 1'},
-      {'title': 'Test 2'},
-      {'title': 'Test 3'},
+      {
+        'title': 'Manage your tasks',
+        'image': AssetPaths.onboarding1,
+        'description': 'You can easily manage all of your daily tasks'
+      },
+      {
+        'title': 'Create daily routine',
+        'image': AssetPaths.onboarding2,
+        'description':
+            'You can create your personalized routine to stay productive'
+      },
+      {
+        'title': 'Organize your tasks',
+        'image': AssetPaths.onboarding3,
+        'description':
+            'You can organize your daily tasks by adding your tasks into separate categories'
+      },
     ];
 
     return Scaffold(
@@ -27,11 +42,10 @@ class OnboardingScreen extends StatelessWidget {
                 onPageChanged: cubit.updatePage,
                 children: List.generate(
                   pages.length,
-                  (index) => Center(
-                    child: Text(
-                      pages[index]['title'],
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
+                  (index) => OnboardingBody(
+                    image: pages[index]['image'],
+                    title: pages[index]['title'],
+                    description: pages[index]['description'],
                   ),
                 ),
               ),
@@ -58,8 +72,8 @@ class OnboardingScreen extends StatelessWidget {
                           onPressed: () {},
                           child: Text(
                             "Back",
-                            style:
-                                TextStyle(fontSize: 16.0, color: Colors.white60),
+                            style: TextStyle(
+                                fontSize: 16.0, color: Colors.white60),
                           ),
                         ),
                         BlocBuilder<OnboardingCubit, int>(
