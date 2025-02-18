@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_now/core/constants/constants.dart';
 import 'package:to_do_now/core/widgets/widgets.dart';
 import 'package:to_do_now/features/onboarding/onboarding.dart';
+import 'package:to_do_now/routes/routes.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -32,7 +33,10 @@ class OnboardingScreen extends StatelessWidget {
               Positioned(
                 top: 0,
                 left: 0,
-                child: CustomTextButton(label: 'skip'),
+                child: CustomTextButton(
+                  label: 'skip',
+                  onPressed: () => context.go(AppRoutes.start.path),
+                ),
               ),
               Positioned(
                 bottom: 0,

@@ -3,6 +3,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'package:to_do_now/core/widgets/widgets.dart';
 import 'package:to_do_now/features/onboarding/onboarding.dart';
+import 'package:to_do_now/routes/routes.dart';
 
 class OnboardingNavigation extends StatelessWidget {
   final OnboardingCubit cubit;
@@ -30,10 +31,10 @@ class OnboardingNavigation extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomTextButton(label: 'back', onPressed: () => cubit.previous()),
-            CustomElevatedButton(
+            CustomElevatedButton.filled(
               label: currentPage == totalPage - 1 ? 'Get Started' : 'Next',
               onPressed: () => currentPage == totalPage - 1
-                  ? null
+                  ? context.go(AppRoutes.start.path)
                   : cubit.nextPage(totalPage),
             ),
           ],
