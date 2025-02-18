@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 import 'package:to_do_now/core/constants/constants.dart';
 import 'package:to_do_now/core/di/di.dart';
+import 'package:to_do_now/core/widgets/widgets.dart';
 import 'package:to_do_now/features/onboarding/onboarding.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -50,14 +52,7 @@ class OnboardingScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Back",
-                            style: TextStyle(
-                                fontSize: 16.0, color: Colors.white60),
-                          ),
-                        ),
+                        CustomTextButton(label: 'back'),
                         BlocBuilder<OnboardingCubit, int>(
                             builder: (context, state) {
                           return ElevatedButton(
@@ -90,13 +85,7 @@ class OnboardingScreen extends StatelessWidget {
               Positioned(
                 top: 0,
                 left: 0,
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Skip',
-                    style: TextStyle(fontSize: 16.0, color: Colors.white60),
-                  ),
-                ),
+                child: CustomTextButton(label: 'skip'),
               ),
             ],
           ),
