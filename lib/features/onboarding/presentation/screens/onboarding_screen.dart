@@ -19,20 +19,20 @@ class OnboardingScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Stack(
             children: [
-              PageView(
+              PageView.builder(
                 controller: cubit.pageController,
                 onPageChanged: cubit.updatePage,
-                children: List.generate(
-                  onboardingItem.length,
-                  (index) => OnboardingBody(
+                itemCount: onboardingItem.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return OnboardingBody(
                     image: onboardingItem[index].image,
                     title: onboardingItem[index].title,
                     description: onboardingItem[index].description,
-                  ),
-                ),
+                  );
+                },
               ),
               Positioned(
-                bottom: 60,
+                bottom: 0,
                 right: 0,
                 left: 0,
                 child: Column(
