@@ -31,7 +31,7 @@ class OnboardingNavigation extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomTextButton(label: 'back', onPressed: () => cubit.previous()),
-            CustomElevatedButton(
+            CustomElevatedButton.filled(
               label: currentPage == totalPage - 1 ? 'Get Started' : 'Next',
               onPressed: () => currentPage == totalPage - 1
                   ? context.go(AppRoutes.start.path)
