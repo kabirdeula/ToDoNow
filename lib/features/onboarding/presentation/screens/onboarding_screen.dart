@@ -54,29 +54,18 @@ class OnboardingScreen extends StatelessWidget {
                       children: [
                         CustomTextButton(label: 'back'),
                         BlocBuilder<OnboardingCubit, int>(
-                            builder: (context, state) {
-                          return ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 24, vertical: 12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                              backgroundColor: Color(0xFF0F68EE),
-                            ),
-                            onPressed: () => state == onboardingItem.length - 1
-                                ? null
-                                : cubit.nextPage(
-                                    totalPages: onboardingItem.length),
-                            child: Text(
-                              state == onboardingItem.length - 1
+                          builder: (context, state) {
+                            return CustomElevatedButton(
+                              label: state == onboardingItem.length - 1
                                   ? 'Get Started'
                                   : 'Next',
-                              style: TextStyle(
-                                  fontSize: 16.0, color: Colors.white),
-                            ),
-                          );
-                        }),
+                              onPressed: () =>
+                                  state == onboardingItem.length - 1
+                                      ? null
+                                      : cubit.nextPage(onboardingItem.length),
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ],

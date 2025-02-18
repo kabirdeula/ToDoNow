@@ -6,7 +6,7 @@ class OnboardingCubit extends Cubit<int> {
 
   OnboardingCubit() : super(0);
 
-  void nextPage({required int totalPages}) {
+  void nextPage(int totalPages) {
     if (state < totalPages - 1) {
       pageController.nextPage(
         duration: Duration(milliseconds: 500),
