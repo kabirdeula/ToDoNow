@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_now/core/themes/app_typography.dart';
 import 'package:to_do_now/core/widgets/widgets.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -13,10 +14,7 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Login',
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-            ),
+            Text('Login', style: AppTypography.headline1()),
             const SizedBox(height: 32.0),
             Text('Username'),
             const SizedBox(height: 8.0),

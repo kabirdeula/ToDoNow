@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_now/core/themes/themes.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   final String label;
@@ -49,10 +50,7 @@ class CustomElevatedButton extends StatelessWidget {
     return ElevatedButton(
       style: style,
       onPressed: onPressed,
-      child: Text(
-        label.toUpperCase(),
-        style: TextStyle(fontSize: 16.0, color: Colors.white),
-      ),
+      child: Text(label.toUpperCase(), style: AppTypography.button()),
     );
   }
 }
