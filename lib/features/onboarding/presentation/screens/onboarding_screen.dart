@@ -16,8 +16,7 @@ class OnboardingScreen extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+        child: ScreenPadding(
           child: Stack(
             children: [
               PageView.builder(

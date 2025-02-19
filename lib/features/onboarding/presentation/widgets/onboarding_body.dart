@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_now/core/themes/themes.dart';
 
 class OnboardingBody extends StatelessWidget {
   final String image;
@@ -20,14 +21,11 @@ class OnboardingBody extends StatelessWidget {
         spacing: 32,
         children: [
           Image.asset(image, height: 270),
-          Text(
-            title,
-            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-          ),
+          Text(title, style: AppTypography.headline1()),
           Text(
             description ?? '',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, height: 1.5),
+            style: AppTypography.bodyText1(),
           ),
         ],
       ),

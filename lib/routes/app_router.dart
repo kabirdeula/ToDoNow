@@ -1,3 +1,4 @@
+import 'package:to_do_now/features/authentication/authentication.dart';
 import 'package:to_do_now/features/onboarding/onboarding.dart';
 import 'package:to_do_now/features/start/start.dart';
 
@@ -16,6 +17,11 @@ class AppRouter {
         path: AppRoutes.start.path,
         name: AppRoutes.start.name,
         builder: (context, index) => const StartScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.login.path,
+        name: AppRoutes.login.name,
+        builder: (context, index) => const LoginScreen(),
       ),
     ],
   );
