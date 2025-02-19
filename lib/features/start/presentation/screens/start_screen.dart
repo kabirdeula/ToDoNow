@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_now/core/widgets/widgets.dart';
+import 'package:to_do_now/routes/routes.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -28,7 +29,7 @@ class StartScreen extends StatelessWidget {
                 width: double.infinity,
                 child: CustomElevatedButton.filled(
                   label: 'login',
-                  onPressed: () {},
+                  onPressed: () => context.push(AppRoutes.login.path),
                 ),
               ),
               const SizedBox(height: 8.0),
