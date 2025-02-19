@@ -21,10 +21,7 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 32.0),
             Text('Username'),
             const SizedBox(height: 8.0),
-            CustomTextFormField(
-              controller: emailController,
-              hintText: 'Enter your Username',
-            ),
+            CustomTextFormField.email(controller: emailController),
             const SizedBox(height: 16.0),
             Text('Password'),
             const SizedBox(height: 8.0),

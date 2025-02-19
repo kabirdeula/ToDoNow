@@ -25,6 +25,9 @@ class CustomTextFormField extends StatelessWidget {
   /// The placeholder text displayed when the field is empty.
   final String? hintText;
 
+  /// A widget displayed at the start of the text field.
+  final Widget? prefixIcon;
+
   /// A widget displayed at the end of the text field.
   final Widget? suffixIcon;
 
@@ -80,6 +83,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.controller,
     this.focusNode,
     this.hintText,
+    this.prefixIcon,
     this.suffixIcon,
     this.keyboardType,
     this.textInputAction,
@@ -99,12 +103,31 @@ class CustomTextFormField extends StatelessWidget {
     this.autovalidateMode = AutovalidateMode.disabled,
   });
 
+  factory CustomTextFormField.email({
+    required TextEditingController controller,
+    String? Function(String?)? validator,
+  }) {
+    return CustomTextFormField(
+      controller: controller,
+      keyboardType: TextInputType.emailAddress,
+      hintText: "Enter your email",
+      prefixIcon: const Icon(Icons.email),
+      autoFillHints: const [AutofillHints.email],
+      validator: validator,
+      textInputAction: TextInputAction.next,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       focusNode: focusNode,
-      decoration: InputDecoration(hintText: hintText, suffixIcon: suffixIcon),
+      decoration: InputDecoration(
+        hintText: hintText,
+        suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
+      ),
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       style: textStyle,
