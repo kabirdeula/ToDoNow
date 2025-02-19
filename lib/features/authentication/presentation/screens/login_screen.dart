@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:to_do_now/core/themes/app_typography.dart';
 import 'package:to_do_now/core/widgets/widgets.dart';
+import 'package:to_do_now/features/authentication/authentication.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -25,9 +28,22 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 16.0),
             Text('Password'),
             const SizedBox(height: 8.0),
-            CustomTextFormField(
-              controller: passwordController,
-              hintText: '********',
+            BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, state) {
+                return CustomTextFormField.password(
+                  controller: passwordController,
+                  isObscureText: state.isObscureText,
+                  suffixIcon: IconButton(
+                    onPressed: () =>
+                        context.read<AuthCubit>().toggleObscureText(),
+                    icon: Icon(
+                      state.isObscureText
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
+                    ),
+                  ),
+                );
+              },
             ),
             const Spacer(),
             SizedBox(

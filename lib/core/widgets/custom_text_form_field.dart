@@ -118,6 +118,23 @@ class CustomTextFormField extends StatelessWidget {
     );
   }
 
+  factory CustomTextFormField.password({
+    required TextEditingController controller,
+    String? Function(String?)? validator,
+    required bool isObscureText,
+    Widget? suffixIcon,
+  }) {
+    return CustomTextFormField(
+      controller: controller,
+      hintText: "********",
+      prefixIcon: const Icon(Icons.lock),
+      autoFillHints: const [AutofillHints.password],
+      validator: validator,
+      isObscureText: isObscureText,
+      suffixIcon: suffixIcon,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(

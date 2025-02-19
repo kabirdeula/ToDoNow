@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/di/di.dart';
 import 'core/themes/themes.dart';
+import 'features/authentication/authentication.dart';
 import 'features/onboarding/onboarding.dart';
 import 'routes/routes.dart';
 
@@ -12,7 +13,10 @@ void main() {
   setupDependencyInjection();
 
   runApp(MultiBlocProvider(
-    providers: [BlocProvider(create: (context) => sl<OnboardingCubit>())],
+    providers: [
+      BlocProvider(create: (context) => sl<OnboardingCubit>()),
+      BlocProvider(create: (context) => sl<AuthCubit>()),
+    ],
     child: const MyApp(),
   ));
 }
