@@ -1,4 +1,5 @@
 import 'package:to_do_now/features/authentication/authentication.dart';
+import 'package:to_do_now/features/dashboard/dashboard.dart';
 import 'package:to_do_now/features/onboarding/onboarding.dart';
 import 'package:to_do_now/features/start/start.dart';
 
@@ -22,6 +23,11 @@ class AppRouter {
         path: AppRoutes.login.path,
         name: AppRoutes.login.name,
         builder: (context, index) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.dashboard.path,
+        name: AppRoutes.dashboard.name,
+        builder: (context, index) => const DashboardScreen(),
       ),
     ],
   );
