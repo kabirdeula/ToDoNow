@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:to_do_now/core/constants/constants.dart';
 
 /// A customizable `TextFormField` widget for consistent styling and functionality.
@@ -16,6 +17,8 @@ import 'package:to_do_now/core/constants/constants.dart';
 ///   )
 /// ```
 class CustomTextFormField extends StatelessWidget {
+  final String name;
+
   /// Controls the text being edited.
   final TextEditingController controller;
 
@@ -49,7 +52,7 @@ class CustomTextFormField extends StatelessWidget {
   /// Whether autocorrection is enabled.
   final bool isAutocorrect;
 
-  final void Function(String)? onChanged;
+  final void Function(String?)? onChanged;
 
   /// Called when the user completes editing.
   final void Function()? onEditingComplete;
@@ -79,6 +82,7 @@ class CustomTextFormField extends StatelessWidget {
   final AutovalidateMode autovalidateMode;
 
   const CustomTextFormField({
+    required this.name,
     super.key,
     required this.controller,
     this.focusNode,
@@ -106,8 +110,10 @@ class CustomTextFormField extends StatelessWidget {
   factory CustomTextFormField.email({
     required TextEditingController controller,
     String? Function(String?)? validator,
+    required String name,
   }) {
     return CustomTextFormField(
+      name: name,
       controller: controller,
       keyboardType: TextInputType.emailAddress,
       hintText: "Enter your email",
@@ -123,8 +129,10 @@ class CustomTextFormField extends StatelessWidget {
     String? Function(String?)? validator,
     required bool isObscureText,
     Widget? suffixIcon,
+    required String name,
   }) {
     return CustomTextFormField(
+      name: name,
       controller: controller,
       hintText: "********",
       prefixIcon: const Icon(Icons.lock),
@@ -137,31 +145,32 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      focusNode: focusNode,
+    return FormBuilderTextField(
+      name: name,
+      validator: validator,
       decoration: InputDecoration(
         hintText: hintText,
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
       ),
-      keyboardType: keyboardType,
-      textInputAction: textInputAction,
-      style: textStyle,
-      autofocus: isAutofocus,
-      obscureText: isObscureText,
-      autocorrect: isAutocorrect,
       onChanged: onChanged,
-      onEditingComplete: onEditingComplete,
-      validator: validator,
+      autovalidateMode: autovalidateMode,
+      focusNode: focusNode,
+      obscureText: isObscureText,
+      enableInteractiveSelection: isEnabledSelection,
+      autofocus: isAutofocus,
+      autocorrect: isAutocorrect,
       cursorWidth: cursorWidth,
       cursorHeight: cursorHeight,
+      keyboardType: keyboardType,
+      style: textStyle,
+      controller: controller,
+      textInputAction: textInputAction,
+      onEditingComplete: onEditingComplete,
       cursorColor: cursorColor,
-      cursorErrorColor: errorColor,
-      enableInteractiveSelection: isEnabledSelection,
-      selectionControls: MaterialTextSelectionControls(),
       autofillHints: autoFillHints,
-      autovalidateMode: autovalidateMode,
+      cursorErrorColor: errorColor,
+      selectionControls: MaterialTextSelectionControls(),
     );
   }
 }

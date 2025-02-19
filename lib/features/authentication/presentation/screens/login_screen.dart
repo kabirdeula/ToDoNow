@@ -30,13 +30,17 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 32.0),
                 Text('Username'),
                 const SizedBox(height: 8.0),
-                CustomTextFormField.email(controller: emailController),
+                CustomTextFormField.email(
+                  name: "email",
+                  controller: emailController,
+                ),
                 const SizedBox(height: 16.0),
                 Text('Password'),
                 const SizedBox(height: 8.0),
                 BlocBuilder<AuthCubit, AuthState>(
                   builder: (context, state) {
                     return CustomTextFormField.password(
+                      name: "password",
                       controller: passwordController,
                       isObscureText: state.isObscureText,
                       suffixIcon: IconButton(
@@ -63,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                             email: emailController.text,
                             password: passwordController.text,
                           );
-            
+
                           context.read<AuthCubit>().login(user: user);
                         },
                       ),
