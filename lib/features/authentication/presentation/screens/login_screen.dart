@@ -7,6 +7,9 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(),
@@ -18,20 +21,16 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 32.0),
             Text('Username'),
             const SizedBox(height: 8.0),
-            TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter your Username',
-              ),
+            CustomTextFormField(
+              controller: emailController,
+              hintText: 'Enter your Username',
             ),
             const SizedBox(height: 16.0),
             Text('Password'),
             const SizedBox(height: 8.0),
-            TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: '********',
-              ),
+            CustomTextFormField(
+              controller: passwordController,
+              hintText: '********',
             ),
             const Spacer(),
             SizedBox(

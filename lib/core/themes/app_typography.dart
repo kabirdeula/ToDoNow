@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_now/core/constants/constants.dart';
 
 /// A utility class for managing application-wide text styles.
 ///
@@ -76,7 +77,7 @@ class AppTypography {
   static TextStyle button({Color? color}) => _baseStyle(
         fontSize: 16,
         fontWeight: FontWeight.w600,
-        color: color ?? Colors.white70,
+        color: color ?? AppColors.placeholder,
       );
 
   // * Input Field Styles
