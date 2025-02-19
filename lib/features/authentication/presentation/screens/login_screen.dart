@@ -46,12 +46,22 @@ class LoginScreen extends StatelessWidget {
               },
             ),
             const Spacer(),
-            SizedBox(
-              width: double.infinity,
-              child: CustomElevatedButton.filled(
-                label: 'login',
-                onPressed: () {},
-              ),
+            BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, state) {
+                final UserModel user = UserModel(
+                  email: emailController.text,
+                  password: passwordController.text,
+                );
+
+                return SizedBox(
+                  width: double.infinity,
+                  child: CustomElevatedButton.filled(
+                    label: 'login',
+                    onPressed: () =>
+                        context.read<AuthCubit>().login(user: user),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 32.0),
             Row(
