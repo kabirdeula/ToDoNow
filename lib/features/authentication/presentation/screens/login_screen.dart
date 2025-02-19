@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_now/core/widgets/buttons/custom_elevated_button.dart';
-import 'package:to_do_now/routes/routes.dart';
+import 'package:to_do_now/core/widgets/widgets.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -9,12 +8,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => context.pop(),
-          icon: Icon(Icons.arrow_back_ios_new),
-        ),
-      ),
+      appBar: CustomAppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
         child: Column(
