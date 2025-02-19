@@ -7,4 +7,7 @@ class AuthRepositoryImpl implements AuthRepository {
     var result = await sl<AuthService>().login(user: user);
     return result;
   }
+
+  @override
+  Future googleLogin() async => await sl<AuthService>().loginWithGoogle();
 }
