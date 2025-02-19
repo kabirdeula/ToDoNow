@@ -9,8 +9,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+      body: ScreenPadding(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

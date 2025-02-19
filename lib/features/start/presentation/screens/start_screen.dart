@@ -9,8 +9,7 @@ class StartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+        child: ScreenPadding(
           child: Column(
             children: [
               const SizedBox(height: 32.0),
