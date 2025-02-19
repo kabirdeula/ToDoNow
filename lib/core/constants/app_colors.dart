@@ -20,16 +20,16 @@ class AppColors {
   static const Color placeholder = Color(0xFFA0A3BD);
 
   /// The color for input field borders or separators. Color code: `#D9DBE9`
-  static const Color line = Color(0xFFD9DBE9);
+  static const Color line = Color(0xFF979797);
 
   /// The background color for input fields. Color code: `#EFF0F6`
-  static const Color inputBackground = Color(0xFFEFF0F6);
+  static const Color inputBackground = Color(0xFF1D1D1D);
 
   /// The background color for the app. Color code: `#F7F7FC`
   static const Color background = Color(0xFFF7F7FC);
 
   /// An off-white color for scaffold or screen backgrounds. Color code: `#FCFCFC`
-  static const Color offWhite = Color(0xFFFCFCFC);
+  static const Color offWhite = Color(0xFFFEFEFE);
 
   // * Primary Colors
   /// The primary color used throughout the application. Color code: `#002D72`
