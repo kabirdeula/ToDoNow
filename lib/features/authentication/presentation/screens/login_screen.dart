@@ -13,17 +13,23 @@ class LoginScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 16,
           children: [
-            Text('Login'),
+            Text(
+              'Login',
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 32.0),
             Text('Username'),
+            const SizedBox(height: 8.0),
             TextFormField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Enter your Username',
               ),
             ),
+            const SizedBox(height: 16.0),
             Text('Password'),
+            const SizedBox(height: 8.0),
             TextFormField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -38,6 +44,7 @@ class LoginScreen extends StatelessWidget {
                 onPressed: () {},
               ),
             ),
+            const SizedBox(height: 32.0),
             Row(
               children: [
                 Expanded(child: Divider()),
@@ -48,6 +55,7 @@ class LoginScreen extends StatelessWidget {
                 Expanded(child: Divider()),
               ],
             ),
+            const SizedBox(height: 32.0),
             SizedBox(
               width: double.infinity,
               child: CustomElevatedButton.outline(
@@ -55,13 +63,15 @@ class LoginScreen extends StatelessWidget {
                 onPressed: () {},
               ),
             ),
+            const SizedBox(height: 16.0),
             SizedBox(
               width: double.infinity,
               child: CustomElevatedButton.outline(
-                label: 'login with google',
+                label: 'login with apple',
                 onPressed: () {},
               ),
             ),
+            const SizedBox(height: 32.0),
             Align(
               alignment: Alignment.bottomCenter,
               child: Text("Don't have an account? Register"),
