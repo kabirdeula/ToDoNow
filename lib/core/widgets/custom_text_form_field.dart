@@ -171,6 +171,7 @@ class CustomTextFormField extends StatelessWidget {
       autofillHints: autoFillHints,
       cursorErrorColor: errorColor,
       selectionControls: MaterialTextSelectionControls(),
+      onTapOutside: (event) => FocusScope.of(context).unfocus(),
     );
   }
 }

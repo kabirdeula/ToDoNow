@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'core/di/di.dart';
 import 'core/themes/themes.dart';
@@ -23,6 +24,11 @@ void main() async {
     ],
     child: const MyApp(),
   ));
+  configLoading();
+}
+
+void configLoading() {
+  EasyLoading.instance.indicatorType = EasyLoadingIndicatorType.wanderingCubes;
 }
 
 class MyApp extends StatelessWidget {
@@ -33,6 +39,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: AppRouter.router,
       theme: AppThemes.themeData,
+      builder: EasyLoading.init(),
     );
   }
 }
