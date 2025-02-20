@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:to_do_now/core/di/di.dart';
 import 'package:to_do_now/features/authentication/authentication.dart';
 import 'package:to_do_now/features/dashboard/dashboard.dart';
@@ -24,9 +25,15 @@ class AppRouter {
           redirect: (context, state) async {
             final settingsService = sl<SettingsService>();
             final isFirstTimeUser = await settingsService.isFirstTimeUser();
-            return isFirstTimeUser
-                ? AppRoutes.onboarding.path
-                : AppRoutes.login.path;
+            final user = FirebaseAuth.instance.currentUser;
+
+            if (isFirstTimeUser) {
+              return AppRoutes.onboarding.path;
+            } else if (user != null) {
+              return AppRoutes.dashboard.path;
+            } else {
+              return AppRoutes.login.path;
+            }
           }),
       GoRoute(
         path: AppRoutes.onboarding.path,

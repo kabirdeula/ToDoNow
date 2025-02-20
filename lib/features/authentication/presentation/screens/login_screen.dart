@@ -53,10 +53,10 @@ class _LoginScreenState extends State<LoginScreen> {
           context.read<AuthCubit>().resetState();
         }
         if (state.isLoggedIn) {
-          EasyLoading.dismiss();
           Future.delayed(const Duration(seconds: 3), () {
             if (!context.mounted) return;
             context.go(AppRoutes.dashboard.path);
+            EasyLoading.dismiss();
           });
         }
       },
