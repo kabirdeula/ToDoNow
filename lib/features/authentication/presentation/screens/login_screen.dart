@@ -19,39 +19,45 @@ class LoginScreen extends StatelessWidget {
 
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
-        EasyLoading.dismiss();
         if (state.isLoggedIn) {
-          context.go(AppRoutes.dashboard.path);
+          Future.delayed(const Duration(seconds: 3), () {
+            EasyLoading.dismiss();
+            if (!context.mounted) return;
+            context.go(AppRoutes.dashboard.path);
+          });
         }
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: CustomAppBar(),
         body: ScreenPadding(
-          child: AutofillGroup(
-            child: FormBuilder(
-              key: formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Login', style: AppTypography.headline1()),
-                  const SizedBox(height: 32.0),
-                  EmailField(controller: emailController),
-                  const SizedBox(height: 16.0),
-                  PasswordField(controller: passwordController),
-                  const Spacer(),
-                  LoginButton(
-                    formKey: formKey,
-                    emailController: emailController,
-                    passwordController: passwordController,
-                  ),
-                  const SizedBox(height: 32.0),
-                  OrDivider(),
-                  const SizedBox(height: 32.0),
-                  SocialLoginButtons(),
-                  const SizedBox(height: 32.0),
-                  RegisterLink()
-                ],
+          child: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: AutofillGroup(
+              child: FormBuilder(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Login', style: AppTypography.headline1()),
+                    const SizedBox(height: 32.0),
+                    EmailField(controller: emailController),
+                    const SizedBox(height: 16.0),
+                    PasswordField(controller: passwordController),
+                    const Spacer(),
+                    LoginButton(
+                      formKey: formKey,
+                      emailController: emailController,
+                      passwordController: passwordController,
+                    ),
+                    const SizedBox(height: 32.0),
+                    OrDivider(),
+                    const SizedBox(height: 32.0),
+                    SocialLoginButtons(),
+                    const SizedBox(height: 32.0),
+                    RegisterLink()
+                  ],
+                ),
               ),
             ),
           ),
