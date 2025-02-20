@@ -26,27 +26,29 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: const CustomAppBar(),
-      body: ScreenPadding(
-        child: AutofillGroup(
-          child: FormBuilder(
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title, style: AppTypography.headline1()),
-                const SizedBox(height: 32.0),
-                ...authenticationFields,
-                OrDivider(),
-                const SizedBox(height: 32.0),
-                SocialLoginButtons(),
-                const SizedBox(height: 16.0),
-                AuthSwitch(
-                  authSwitchText: authSwitchText,
-                  authSwitchAction: authSwitchAction,
-                  location: location,
-                ),
-              ],
+      body: SafeArea(
+        child: ScreenPadding(
+          child: AutofillGroup(
+            child: FormBuilder(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 24.0),
+                  Text(title, style: AppTypography.headline1()),
+                  const SizedBox(height: 32.0),
+                  ...authenticationFields,
+                  OrDivider(),
+                  const SizedBox(height: 32.0),
+                  SocialLoginButtons(),
+                  const SizedBox(height: 16.0),
+                  AuthSwitch(
+                    authSwitchText: authSwitchText,
+                    authSwitchAction: authSwitchAction,
+                    location: location,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
