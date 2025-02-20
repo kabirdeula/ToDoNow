@@ -6,17 +6,19 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:to_do_now/core/widgets/widgets.dart';
 import 'package:to_do_now/features/authentication/authentication.dart';
 
-class LoginButton extends StatelessWidget {
-  const LoginButton({
+class AuthButton extends StatelessWidget {
+  final String label;
+  final GlobalKey<FormBuilderState> formKey;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+
+  const AuthButton({
     super.key,
     required this.formKey,
     required this.emailController,
     required this.passwordController,
+    required this.label,
   });
-
-  final GlobalKey<FormBuilderState> formKey;
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class LoginButton extends StatelessWidget {
         return SizedBox(
           width: double.infinity,
           child: CustomElevatedButton.filled(
-            label: 'login',
+            label: label,
             onPressed: () {
               if (formKey.currentState?.saveAndValidate() ?? false) {
                 EasyLoading.show(status: "Logging in...");
