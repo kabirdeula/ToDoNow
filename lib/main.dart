@@ -8,6 +8,7 @@ import 'core/di/di.dart';
 import 'core/themes/themes.dart';
 import 'features/authentication/authentication.dart';
 import 'features/onboarding/onboarding.dart';
+import 'features/settings/settings.dart';
 import 'firebase_options.dart';
 import 'routes/routes.dart';
 
@@ -15,6 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Hive.initFlutter();
+  Hive.registerAdapter(SettingsModelAdapter());
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
