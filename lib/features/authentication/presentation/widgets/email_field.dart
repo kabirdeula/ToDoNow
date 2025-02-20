@@ -10,6 +10,8 @@ class EmailField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text('Email'),
         const SizedBox(height: 8.0),
