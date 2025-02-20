@@ -1,0 +1,12 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Generate: Launcher Icons",
+      "type": "dart",
+      "command": "dart",
+      "args": ["run", "flutter_launcher_icons"],
+      "detail": "Generate a launcher icons using flutter_launcher_icons"
+    }
+  ]
+}
