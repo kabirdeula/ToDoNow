@@ -48,4 +48,21 @@ class AuthCubit extends Cubit<AuthState> {
       log.e("(Auth Cubit) Failed to Login: ${e.toString()}");
     }
   }
+
+  void register({required UserModel user}) async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      final result = await sl<RegisterUsecase>().call(user: user);
+      if (result.error != null) {
+        emit(state.copyWith(isLoading: true, isLoggedIn: false));
+        log.e("(Auth Cubit) Register Error: ${result.error}");
+      } else {
+        emit(state.copyWith(isLoading: false, isLoggedIn: true));
+        log.i("(Auth Cubit) User registered successfully.");
+      }
+    } catch (e) {
+      emit(state.copyWith(isLoading: false, isLoggedIn: false));
+      log.e("(Auth Cubit) Failed to register: ${e.toString()}");
+    }
+  }
 }
