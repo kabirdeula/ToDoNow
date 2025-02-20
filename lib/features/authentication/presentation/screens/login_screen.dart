@@ -32,16 +32,17 @@ class LoginScreen extends StatelessWidget {
           const SizedBox(height: 16.0),
           PasswordField(controller: passwordController),
           const Spacer(),
-          LoginButton(
+          AuthButton(
+            label: 'login',
             formKey: formKey,
             emailController: emailController,
             passwordController: passwordController,
           ),
-          const SizedBox(height: 32.0),
+          const SizedBox(height: 16.0),
         ],
         authSwitchText: "Don't have an account?",
         authSwitchAction: 'register',
-        location: '',
+        location: AppRoutes.register.path,
         formKey: formKey,
       ),
     );
