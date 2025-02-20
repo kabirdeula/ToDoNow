@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:to_do_now/core/widgets/widgets.dart';
@@ -11,6 +10,7 @@ class AuthButton extends StatelessWidget {
   final GlobalKey<FormBuilderState> formKey;
   final TextEditingController emailController;
   final TextEditingController passwordController;
+  final VoidCallback? onPressed;
 
   const AuthButton({
     super.key,
@@ -18,6 +18,7 @@ class AuthButton extends StatelessWidget {
     required this.emailController,
     required this.passwordController,
     required this.label,
+    this.onPressed,
   });
 
   @override
@@ -28,16 +29,7 @@ class AuthButton extends StatelessWidget {
           width: double.infinity,
           child: CustomElevatedButton.filled(
             label: label,
-            onPressed: () {
-              if (formKey.currentState?.saveAndValidate() ?? false) {
-                EasyLoading.show(status: "Logging in...");
-                final UserModel user = UserModel(
-                  email: emailController.text,
-                  password: passwordController.text,
-                );
-                context.read<AuthCubit>().login(user: user);
-              }
-            },
+            onPressed: onPressed,
           ),
         );
       },

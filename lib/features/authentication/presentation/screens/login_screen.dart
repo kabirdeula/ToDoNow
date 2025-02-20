@@ -37,6 +37,16 @@ class LoginScreen extends StatelessWidget {
             formKey: formKey,
             emailController: emailController,
             passwordController: passwordController,
+            onPressed: () {
+              if (formKey.currentState?.saveAndValidate() ?? false) {
+                EasyLoading.show(status: "Logging in...");
+                final UserModel user = UserModel(
+                  email: emailController.text,
+                  password: passwordController.text,
+                );
+                context.read<AuthCubit>().login(user: user);
+              }
+            },
           ),
           const SizedBox(height: 16.0),
         ],
