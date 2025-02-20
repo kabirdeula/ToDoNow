@@ -65,6 +65,10 @@ class AuthService {
     await _auth.signOut();
   }
 
+  Future<void> setupFirebaseAuthPersistence() async {
+    await FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
+  }
+
   AuthResponse _handleFirebaseAuthException(FirebaseAuthException e) {
     String errorMessage;
 
