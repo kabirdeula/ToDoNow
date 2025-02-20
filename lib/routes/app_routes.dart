@@ -4,6 +4,7 @@ enum AppRoutes {
   login('/login'),
   dashboard('/dashboard'),
   register('/register'),
+  onboarding('/onboarding'),
   ;
 
   final String path;

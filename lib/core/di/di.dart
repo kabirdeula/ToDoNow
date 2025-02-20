@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 
 import 'package:to_do_now/features/authentication/authentication.dart';
 import 'package:to_do_now/features/onboarding/onboarding.dart';
+import 'package:to_do_now/features/settings/settings.dart';
 
 final sl = GetIt.instance;
 
@@ -23,6 +24,7 @@ void setupRepositoryInjection() {
 
 void setupServiceInjection() {
   sl.registerSingleton<AuthService>(AuthService());
+  sl.registerSingleton<SettingsService>(SettingsService());
 }
 
 void setupUsecaseInjection() {
