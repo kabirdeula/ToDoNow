@@ -40,7 +40,7 @@ class AuthScreen extends StatelessWidget {
                 OrDivider(),
                 const SizedBox(height: 32.0),
                 SocialLoginButtons(),
-                const SizedBox(height: 32.0),
+                const SizedBox(height: 16.0),
                 AuthSwitch(
                   authSwitchText: authSwitchText,
                   authSwitchAction: authSwitchAction,

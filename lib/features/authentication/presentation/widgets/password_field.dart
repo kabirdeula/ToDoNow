@@ -5,9 +5,10 @@ import 'package:to_do_now/core/widgets/widgets.dart';
 import 'package:to_do_now/features/authentication/authentication.dart';
 
 class PasswordField extends StatelessWidget {
+  final String? title;
   final TextEditingController controller;
 
-  const PasswordField({super.key, required this.controller});
+  const PasswordField({super.key, required this.controller, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class PasswordField extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text('Password'),
+            Text(title ?? 'Password'),
             const SizedBox(height: 8.0),
             CustomTextFormField.password(
               name: "password",
