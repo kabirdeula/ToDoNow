@@ -4,13 +4,13 @@ class AuthState extends Equatable {
   final bool isLoading;
   final bool isLoggedIn;
   final bool isObscureText;
-  final String? uid;
+  final String? error;
 
   const AuthState({
     this.isLoading = false,
     this.isLoggedIn = false,
     this.isObscureText = true,
-    this.uid,
+    this.error,
   });
 
   factory AuthState.initial() => const AuthState();
@@ -18,17 +18,17 @@ class AuthState extends Equatable {
   AuthState copyWith({
     bool? isLoading,
     bool? isLoggedIn,
-    String? uid,
     bool? isObscureText,
+    String? error,
   }) {
     return AuthState(
       isLoading: isLoading ?? this.isLoading,
       isLoggedIn: isLoggedIn ?? this.isLoggedIn,
       isObscureText: isObscureText ?? this.isObscureText,
-      uid: uid ?? this.uid,
+      error: error ?? this.error,
     );
   }
 
   @override
-  List<Object?> get props => [isLoading, isLoggedIn, uid, isObscureText];
+  List<Object?> get props => [isLoading, isLoggedIn, isObscureText, error];
 }

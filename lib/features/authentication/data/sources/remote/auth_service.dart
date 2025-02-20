@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:to_do_now/core/utils/utils.dart';
 import 'package:to_do_now/features/authentication/authentication.dart';
 
 class AuthService {
@@ -43,6 +44,22 @@ class AuthService {
     }
   }
 
+  Future<AuthResponse> register({required UserModel user}) async {
+    try {
+      await _auth.createUserWithEmailAndPassword(
+        email: user.email,
+        password: user.password,
+      );
+
+      log.i("(Auth Service) User registered successfully.");
+      return AuthResponse(success: "User registered successfully.");
+    } on FirebaseAuthException catch (e) {
+      return _handleFirebaseAuthException(e);
+    } catch (e) {
+      return AuthResponse(error: e.toString());
+    }
+  }
+
   Future<void> signOut() async {
     await _googleSignIn.signOut();
     await _auth.signOut();
@@ -58,10 +75,17 @@ class AuthService {
       case 'wrong-password':
         errorMessage = "Wrong password provided for that user.";
         break;
+      case 'weak-password':
+        errorMessage = "The password provided is too weak";
+        break;
+      case 'email-already-in-use':
+        errorMessage = "The account already exists for that email";
+        break;
       default:
         errorMessage = e.message ?? "Unknown error occurred";
     }
 
+    log.e("(Auth Service) Error: $errorMessage");
     return AuthResponse(error: errorMessage);
   }
 }

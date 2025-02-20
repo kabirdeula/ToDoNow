@@ -25,6 +25,11 @@ class AppRouter {
         builder: (context, index) => const LoginScreen(),
       ),
       GoRoute(
+        path: AppRoutes.register.path,
+        name: AppRoutes.register.name,
+        builder: (context, index) => const RegisterScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.dashboard.path,
         name: AppRoutes.dashboard.name,
         builder: (context, index) => const DashboardScreen(),

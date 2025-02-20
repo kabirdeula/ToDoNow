@@ -28,4 +28,5 @@ void setupServiceInjection() {
 void setupUsecaseInjection() {
   sl.registerSingleton<LoginUsecase>(LoginUsecase());
   sl.registerSingleton<GoogleLoginUsecase>(GoogleLoginUsecase());
+  sl.registerSingleton<RegisterUsecase>(RegisterUsecase());
 }

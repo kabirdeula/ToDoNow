@@ -21,14 +21,22 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final result = await sl<LoginUsecase>().call(user: user);
       if (result.error != null) {
-        emit(state.copyWith(isLoading: false, isLoggedIn: false));
+        emit(state.copyWith(
+          isLoading: false,
+          isLoggedIn: false,
+          error: result.error,
+        ));
         log.e("(Auth Cubit) Login Error: ${result.error}");
       } else {
         emit(state.copyWith(isLoading: false, isLoggedIn: true));
         log.i("(Auth Cubit) User Logged in successfully.");
       }
     } catch (e) {
-      emit(state.copyWith(isLoading: false, isLoggedIn: false));
+      emit(state.copyWith(
+        isLoading: false,
+        isLoggedIn: false,
+        error: e.toString(),
+      ));
       log.e("(Auth Cubit) Failed to Login: ${e.toString()}");
     }
   }
@@ -44,8 +52,37 @@ class AuthCubit extends Cubit<AuthState> {
         emit(state.copyWith(isLoading: false, isLoggedIn: false));
       }
     } catch (e) {
-      emit(state.copyWith(isLoading: false, isLoggedIn: false));
+      emit(state.copyWith(
+        isLoading: false,
+        isLoggedIn: false,
+        error: e.toString(),
+      ));
       log.e("(Auth Cubit) Failed to Login: ${e.toString()}");
+    }
+  }
+
+  void register({required UserModel user}) async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      final result = await sl<RegisterUsecase>().call(user: user);
+      if (result.error != null) {
+        emit(state.copyWith(
+          isLoading: true,
+          isLoggedIn: false,
+          error: result.error,
+        ));
+        log.e("(Auth Cubit) Register Error: ${result.error}");
+      } else {
+        emit(state.copyWith(isLoading: false, isLoggedIn: true));
+        log.i("(Auth Cubit) User registered successfully.");
+      }
+    } catch (e) {
+      emit(state.copyWith(
+        isLoading: false,
+        isLoggedIn: false,
+        error: e.toString(),
+      ));
+      log.e("(Auth Cubit) Failed to register: ${e.toString()}");
     }
   }
 }

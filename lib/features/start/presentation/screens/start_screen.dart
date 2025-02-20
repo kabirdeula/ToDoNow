@@ -34,7 +34,7 @@ class StartScreen extends StatelessWidget {
                 width: double.infinity,
                 child: CustomElevatedButton.outline(
                   label: 'create account',
-                  onPressed: () {},
+                  onPressed: () => context.push(AppRoutes.register.path),
                 ),
               ),
             ],

@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import 'package:to_do_now/core/themes/app_typography.dart';
-import 'package:to_do_now/core/widgets/widgets.dart';
 import 'package:to_do_now/features/authentication/authentication.dart';
 import 'package:to_do_now/routes/routes.dart';
 
@@ -27,41 +25,35 @@ class LoginScreen extends StatelessWidget {
           });
         }
       },
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: CustomAppBar(),
-        body: ScreenPadding(
-          child: GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(),
-            child: AutofillGroup(
-              child: FormBuilder(
-                key: formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Login', style: AppTypography.headline1()),
-                    const SizedBox(height: 32.0),
-                    EmailField(controller: emailController),
-                    const SizedBox(height: 16.0),
-                    PasswordField(controller: passwordController),
-                    const Spacer(),
-                    LoginButton(
-                      formKey: formKey,
-                      emailController: emailController,
-                      passwordController: passwordController,
-                    ),
-                    const SizedBox(height: 32.0),
-                    OrDivider(),
-                    const SizedBox(height: 32.0),
-                    SocialLoginButtons(),
-                    const SizedBox(height: 32.0),
-                    RegisterLink()
-                  ],
-                ),
-              ),
-            ),
+      child: AuthScreen(
+        title: 'Login',
+        authenticationFields: [
+          EmailField(controller: emailController),
+          const SizedBox(height: 16.0),
+          PasswordField(controller: passwordController),
+          const Spacer(),
+          AuthButton(
+            label: 'login',
+            formKey: formKey,
+            emailController: emailController,
+            passwordController: passwordController,
+            onPressed: () {
+              if (formKey.currentState?.saveAndValidate() ?? false) {
+                EasyLoading.show(status: "Logging in...");
+                final UserModel user = UserModel(
+                  email: emailController.text,
+                  password: passwordController.text,
+                );
+                context.read<AuthCubit>().login(user: user);
+              }
+            },
           ),
-        ),
+          const SizedBox(height: 16.0),
+        ],
+        authSwitchText: "Don't have an account?",
+        authSwitchAction: 'register',
+        location: AppRoutes.register.path,
+        formKey: formKey,
       ),
     );
   }
