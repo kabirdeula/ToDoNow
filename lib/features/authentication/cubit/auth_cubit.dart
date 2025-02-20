@@ -85,4 +85,6 @@ class AuthCubit extends Cubit<AuthState> {
       log.e("(Auth Cubit) Failed to register: ${e.toString()}");
     }
   }
+
+  void resetState() => emit(AuthState.initial());
 }
