@@ -9,10 +9,10 @@ import 'package:to_do_now/features/task/task.dart';
 final sl = GetIt.instance;
 
 void setupDependencyInjection() {
-  setupCubitInjection();
   setupServiceInjection();
   setupRepositoryInjection();
   setupUsecaseInjection();
+  setupCubitInjection();
 }
 
 void setupCubitInjection() {

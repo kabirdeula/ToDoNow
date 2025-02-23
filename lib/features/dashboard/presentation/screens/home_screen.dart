@@ -1,4 +1,5 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_now/features/dashboard/dashboard.dart';
 import 'package:to_do_now/features/task/task.dart';
@@ -14,10 +15,16 @@ class HomeScreen extends StatelessWidget {
           return EmptyHomeScreen();
         }
 
-        return ListView.builder(
-          itemCount: state.tasks.length,
-          itemBuilder: (context, index) => Text(
-            state.tasks[index].title ?? "N/A",
+        return RefreshIndicator(
+          onRefresh: () {
+            context.read<TaskCubit>().loadTasks();
+            return Future.delayed(const Duration(seconds: 1));
+          },
+          child: ListView.builder(
+            itemCount: state.tasks.length,
+            itemBuilder: (context, index) => Text(
+              state.tasks[index].title ?? "N/A",
+            ),
           ),
         );
       },

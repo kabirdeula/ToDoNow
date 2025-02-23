@@ -14,7 +14,17 @@ class TaskService {
       final box = await _box;
       await box.add(task);
     } catch (e) {
-      log.e("(Task Service): Error saving task: $e");
+      log.e("(Task Service) Error saving task: $e");
+    }
+  }
+
+  Future<List<TaskModel>> getTasks() async {
+    try {
+      final box = await _box;
+      return box.values.toList();
+    } catch (e) {
+      log.e("(Task Service) Error getting tasks: $e");
+      return [];
     }
   }
 }

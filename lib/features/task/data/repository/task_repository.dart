@@ -6,4 +6,9 @@ class TaskRepositoryImpl implements TaskRepository {
   Future<void> addTask(TaskModel task) async {
     await sl<TaskService>().addTask(task: task);
   }
+
+  @override
+  Future<List<TaskModel>> getTasks() async {
+    return await sl<TaskService>().getTasks();
+  }
 }
