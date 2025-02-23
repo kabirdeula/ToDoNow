@@ -5,6 +5,7 @@ enum AppRoutes {
   dashboard('/dashboard'),
   register('/register'),
   onboarding('/onboarding'),
+  emptyHomeScreen('/empty_home_screen'),
   ;
 
   final String path;

@@ -9,6 +9,7 @@ import 'core/themes/themes.dart';
 import 'features/authentication/authentication.dart';
 import 'features/onboarding/onboarding.dart';
 import 'features/settings/settings.dart';
+import 'features/task/task.dart';
 import 'firebase_options.dart';
 import 'routes/routes.dart';
 
@@ -17,6 +18,7 @@ void main() async {
 
   await Hive.initFlutter();
   Hive.registerAdapter(SettingsModelAdapter());
+  Hive.registerAdapter(TaskModelAdapter());
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
@@ -26,6 +28,7 @@ void main() async {
     providers: [
       BlocProvider(create: (context) => sl<OnboardingCubit>()),
       BlocProvider(create: (context) => sl<AuthCubit>()),
+      BlocProvider(create: (context) => sl<TaskCubit>()),
     ],
     child: const MyApp(),
   ));
