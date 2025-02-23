@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_now/core/constants/constants.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -27,8 +26,6 @@ class DashboardScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.primary,
-        shape: CircleBorder(),
         onPressed: () {},
         child: Icon(Icons.add),
       ),
