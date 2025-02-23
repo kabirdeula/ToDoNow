@@ -58,7 +58,7 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.dashboard.path,
         name: AppRoutes.dashboard.name,
-        builder: (context, index) => const DashboardScreen(),
+        builder: (context, index) => DashboardScreen(),
       ),
     ],
   );

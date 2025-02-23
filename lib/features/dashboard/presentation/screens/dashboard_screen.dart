@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:to_do_now/core/widgets/widgets.dart';
 import 'package:to_do_now/features/dashboard/dashboard.dart';
 
-class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
+class DashboardScreen extends StatelessWidget with DashboardMixin {
+  DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: Icon(Icons.menu),
         title: Text('Hello'),
@@ -19,7 +20,9 @@ class DashboardScreen extends StatelessWidget {
         ],
       ),
       body: EmptyHomeScreen(),
-      floatingActionButton: CustomFloatingActionButton(),
+      floatingActionButton: CustomFloatingActionButton(
+        onPressed: () => createTask(context),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: NavigationBar(
         destinations: [
