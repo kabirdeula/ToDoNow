@@ -20,19 +20,22 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       id: fields[0] as String?,
       title: fields[1] as String,
       description: fields[2] as String?,
+      dueDateTime: fields[3] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.title)
       ..writeByte(2)
-      ..write(obj.description);
+      ..write(obj.description)
+      ..writeByte(3)
+      ..write(obj.dueDateTime);
   }
 
   @override
@@ -55,6 +58,9 @@ _$TaskModelImpl _$$TaskModelImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String?,
       title: json['title'] as String,
       description: json['description'] as String?,
+      dueDateTime: json['dueDateTime'] == null
+          ? null
+          : DateTime.parse(json['dueDateTime'] as String),
     );
 
 Map<String, dynamic> _$$TaskModelImplToJson(_$TaskModelImpl instance) =>
@@ -62,4 +68,5 @@ Map<String, dynamic> _$$TaskModelImplToJson(_$TaskModelImpl instance) =>
       'id': instance.id,
       'title': instance.title,
       'description': instance.description,
+      'dueDateTime': instance.dueDateTime?.toIso8601String(),
     };

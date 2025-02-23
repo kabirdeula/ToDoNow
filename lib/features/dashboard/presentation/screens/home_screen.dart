@@ -24,8 +24,10 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: ListView.builder(
               itemCount: state.tasks.length,
-              itemBuilder: (context, index) =>
-                  TaskListTile(title: state.tasks[index].title),
+              itemBuilder: (context, index) => TaskListTile(
+                title: state.tasks[index].title,
+                time: state.tasks[index].dueDateTime,
+              ),
             ),
           ),
         );

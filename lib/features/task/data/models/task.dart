@@ -11,6 +11,7 @@ class TaskModel with _$TaskModel {
     @HiveField(0) String? id,
     @HiveField(1) required String title,
     @HiveField(2) String? description,
+    @HiveField(3) DateTime? dueDateTime,
   }) = _TaskModel;
 
   factory TaskModel.fromJson(Map<String, dynamic> json) =>

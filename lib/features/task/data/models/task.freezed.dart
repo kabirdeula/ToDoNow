@@ -26,6 +26,8 @@ mixin _$TaskModel {
   String get title => throw _privateConstructorUsedError;
   @HiveField(2)
   String? get description => throw _privateConstructorUsedError;
+  @HiveField(3)
+  DateTime? get dueDateTime => throw _privateConstructorUsedError;
 
   /// Serializes this TaskModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,7 +47,8 @@ abstract class $TaskModelCopyWith<$Res> {
   $Res call(
       {@HiveField(0) String? id,
       @HiveField(1) String title,
-      @HiveField(2) String? description});
+      @HiveField(2) String? description,
+      @HiveField(3) DateTime? dueDateTime});
 }
 
 /// @nodoc
@@ -66,6 +69,7 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
     Object? id = freezed,
     Object? title = null,
     Object? description = freezed,
+    Object? dueDateTime = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -80,6 +84,10 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      dueDateTime: freezed == dueDateTime
+          ? _value.dueDateTime
+          : dueDateTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -95,7 +103,8 @@ abstract class _$$TaskModelImplCopyWith<$Res>
   $Res call(
       {@HiveField(0) String? id,
       @HiveField(1) String title,
-      @HiveField(2) String? description});
+      @HiveField(2) String? description,
+      @HiveField(3) DateTime? dueDateTime});
 }
 
 /// @nodoc
@@ -114,6 +123,7 @@ class __$$TaskModelImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? title = null,
     Object? description = freezed,
+    Object? dueDateTime = freezed,
   }) {
     return _then(_$TaskModelImpl(
       id: freezed == id
@@ -128,6 +138,10 @@ class __$$TaskModelImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      dueDateTime: freezed == dueDateTime
+          ? _value.dueDateTime
+          : dueDateTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -138,7 +152,8 @@ class _$TaskModelImpl implements _TaskModel {
   const _$TaskModelImpl(
       {@HiveField(0) this.id,
       @HiveField(1) required this.title,
-      @HiveField(2) this.description});
+      @HiveField(2) this.description,
+      @HiveField(3) this.dueDateTime});
 
   factory _$TaskModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskModelImplFromJson(json);
@@ -152,10 +167,13 @@ class _$TaskModelImpl implements _TaskModel {
   @override
   @HiveField(2)
   final String? description;
+  @override
+  @HiveField(3)
+  final DateTime? dueDateTime;
 
   @override
   String toString() {
-    return 'TaskModel(id: $id, title: $title, description: $description)';
+    return 'TaskModel(id: $id, title: $title, description: $description, dueDateTime: $dueDateTime)';
   }
 
   @override
@@ -166,12 +184,15 @@ class _$TaskModelImpl implements _TaskModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            (identical(other.dueDateTime, dueDateTime) ||
+                other.dueDateTime == dueDateTime));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, description);
+  int get hashCode =>
+      Object.hash(runtimeType, id, title, description, dueDateTime);
 
   /// Create a copy of TaskModel
   /// with the given fields replaced by the non-null parameter values.
@@ -193,7 +214,8 @@ abstract class _TaskModel implements TaskModel {
   const factory _TaskModel(
       {@HiveField(0) final String? id,
       @HiveField(1) required final String title,
-      @HiveField(2) final String? description}) = _$TaskModelImpl;
+      @HiveField(2) final String? description,
+      @HiveField(3) final DateTime? dueDateTime}) = _$TaskModelImpl;
 
   factory _TaskModel.fromJson(Map<String, dynamic> json) =
       _$TaskModelImpl.fromJson;
@@ -207,6 +229,9 @@ abstract class _TaskModel implements TaskModel {
   @override
   @HiveField(2)
   String? get description;
+  @override
+  @HiveField(3)
+  DateTime? get dueDateTime;
 
   /// Create a copy of TaskModel
   /// with the given fields replaced by the non-null parameter values.
