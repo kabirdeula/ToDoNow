@@ -20,9 +20,13 @@ class HomeScreen extends StatelessWidget {
             context.read<TaskCubit>().loadTasks();
             return Future.delayed(const Duration(seconds: 1));
           },
-          child: ListView.builder(
-            itemCount: state.tasks.length,
-            itemBuilder: (context, index) => Text(state.tasks[index].title),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: ListView.builder(
+              itemCount: state.tasks.length,
+              itemBuilder: (context, index) =>
+                  TaskListTile(title: state.tasks[index].title),
+            ),
           ),
         );
       },
