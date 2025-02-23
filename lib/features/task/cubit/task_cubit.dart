@@ -31,4 +31,24 @@ class TaskCubit extends Cubit<TaskState> {
       log.e("(Task Cubit) Error getting tasks: $e");
     }
   }
+
+  void toggleSelection(String taskId) {
+    final newSelectedTasks = Set<String>.from(state.selectedTasks);
+    if (newSelectedTasks.contains(taskId)) {
+      newSelectedTasks.remove(taskId);
+    } else {
+      newSelectedTasks.add(taskId);
+    }
+
+    emit(state.copyWith(
+      selectedTasks: newSelectedTasks,
+      isSelectionMode: newSelectedTasks.isNotEmpty,
+    ));
+  }
+
+  void clearSelection() {
+    emit(state.copyWith(selectedTasks: {}, isSelectionMode: false));
+  }
+
+  void deleteSelectedTasks() {}
 }
