@@ -60,6 +60,11 @@ class AppRouter {
         name: AppRoutes.dashboard.name,
         builder: (context, index) => DashboardScreen(),
       ),
+      GoRoute(
+        path: AppRoutes.emptyHomeScreen.path,
+        name: AppRoutes.emptyHomeScreen.name,
+        builder: (context, index) => const EmptyHomeScreen(),
+      ),
     ],
   );
 }

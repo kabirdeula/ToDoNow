@@ -19,7 +19,7 @@ class DashboardScreen extends StatelessWidget with DashboardMixin {
           ),
         ],
       ),
-      body: EmptyHomeScreen(),
+      body: HomeScreen(),
       floatingActionButton: CustomFloatingActionButton(
         onPressed: () => createTask(context),
       ),
