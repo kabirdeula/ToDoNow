@@ -81,6 +81,10 @@ class CustomTextFormField extends StatelessWidget {
   /// Controls the validation behavior (e.g., disabled, always, onUserInteraction)
   final AutovalidateMode autovalidateMode;
 
+  final Color? fillColor;
+
+  final TextCapitalization textCapitalization;
+
   const CustomTextFormField({
     required this.name,
     super.key,
@@ -105,6 +109,8 @@ class CustomTextFormField extends StatelessWidget {
     this.isEnabledSelection = true,
     this.autoFillHints,
     this.autovalidateMode = AutovalidateMode.disabled,
+    this.fillColor,
+    this.textCapitalization = TextCapitalization.none,
   });
 
   factory CustomTextFormField.email({
@@ -149,6 +155,7 @@ class CustomTextFormField extends StatelessWidget {
       name: name,
       validator: validator,
       decoration: InputDecoration(
+        fillColor: fillColor,
         hintText: hintText,
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
@@ -172,6 +179,7 @@ class CustomTextFormField extends StatelessWidget {
       cursorErrorColor: errorColor,
       selectionControls: MaterialTextSelectionControls(),
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
+      textCapitalization: textCapitalization,
     );
   }
 }

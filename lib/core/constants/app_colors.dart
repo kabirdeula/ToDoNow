@@ -26,7 +26,7 @@ class AppColors {
   static const Color inputBackground = Color(0xFF1D1D1D);
 
   /// The background color for the app. Color code: `#F7F7FC`
-  static const Color background = Color(0xFFF7F7FC);
+  static const Color background = Color(0xFF363636);
 
   /// An off-white color for scaffold or screen backgrounds. Color code: `#FCFCFC`
   static const Color offWhite = Color(0xFFFEFEFE);
