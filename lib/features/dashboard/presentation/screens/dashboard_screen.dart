@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_now/core/widgets/widgets.dart';
+import 'package:to_do_now/features/dashboard/dashboard.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -17,15 +18,7 @@ class DashboardScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.hourglass_empty, size: 180),
-            Text('Tap + to add your tasks'),
-          ],
-        ),
-      ),
+      body: EmptyHomeScreen(),
       floatingActionButton: CustomFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: NavigationBar(
