@@ -28,6 +28,7 @@ void main() async {
     providers: [
       BlocProvider(create: (context) => sl<OnboardingCubit>()),
       BlocProvider(create: (context) => sl<AuthCubit>()),
+      BlocProvider(create: (context) => sl<TaskCubit>()),
     ],
     child: const MyApp(),
   ));

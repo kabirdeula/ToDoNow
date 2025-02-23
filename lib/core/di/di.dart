@@ -23,6 +23,7 @@ void setupCubitInjection() {
 
 void setupRepositoryInjection() {
   sl.registerSingleton<AuthRepository>(AuthRepositoryImpl());
+  sl.registerSingleton<TaskRepository>(TaskRepositoryImpl());
 }
 
 void setupServiceInjection() async {
@@ -36,4 +37,5 @@ void setupUsecaseInjection() {
   sl.registerSingleton<LoginUsecase>(LoginUsecase());
   sl.registerSingleton<GoogleLoginUsecase>(GoogleLoginUsecase());
   sl.registerSingleton<RegisterUsecase>(RegisterUsecase());
+  sl.registerSingleton<TaskUsecase>(TaskUsecase());
 }

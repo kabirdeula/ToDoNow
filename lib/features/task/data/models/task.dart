@@ -4,7 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 part 'task.freezed.dart';
 part 'task.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 1)
 @freezed
 class TaskModel with _$TaskModel {
   const factory TaskModel({
