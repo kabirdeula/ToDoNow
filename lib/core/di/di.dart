@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:to_do_now/features/authentication/authentication.dart';
 import 'package:to_do_now/features/onboarding/onboarding.dart';
 import 'package:to_do_now/features/settings/settings.dart';
+import 'package:to_do_now/features/task/task.dart';
 
 final sl = GetIt.instance;
 
@@ -17,6 +18,7 @@ void setupDependencyInjection() {
 void setupCubitInjection() {
   sl.registerSingleton<OnboardingCubit>(OnboardingCubit());
   sl.registerSingleton<AuthCubit>(AuthCubit());
+  sl.registerSingleton<TaskCubit>(TaskCubit());
 }
 
 void setupRepositoryInjection() {
@@ -27,6 +29,7 @@ void setupServiceInjection() async {
   sl.registerSingleton<AuthService>(AuthService());
   sl.registerSingleton<SettingsService>(SettingsService());
   sl.registerSingleton<FirebaseAuth>(FirebaseAuth.instance);
+  sl.registerSingleton<TaskService>(TaskService());
 }
 
 void setupUsecaseInjection() {
