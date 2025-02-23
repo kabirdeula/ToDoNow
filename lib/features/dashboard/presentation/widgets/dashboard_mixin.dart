@@ -8,6 +8,7 @@ import 'package:to_do_now/core/utils/utils.dart';
 import 'package:to_do_now/core/widgets/widgets.dart';
 import 'package:to_do_now/features/task/task.dart';
 import 'package:to_do_now/routes/routes.dart';
+import 'package:uuid/uuid.dart';
 
 mixin DashboardMixin {
   final formKey = GlobalKey<FormBuilderState>();
@@ -61,7 +62,9 @@ mixin DashboardMixin {
                     ),
                     IconButton(
                       onPressed: () {
+                        var uuid = Uuid();
                         final task = TaskModel(
+                          id: uuid.v4(),
                           title: titleController.text,
                           description: descriptionController.text,
                         );

@@ -9,7 +9,7 @@ part 'task.g.dart';
 class TaskModel with _$TaskModel {
   const factory TaskModel({
     @HiveField(0) String? id,
-    @HiveField(1) String? title,
+    @HiveField(1) required String title,
     @HiveField(2) String? description,
   }) = _TaskModel;
 

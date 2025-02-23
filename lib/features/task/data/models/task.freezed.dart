@@ -23,7 +23,7 @@ mixin _$TaskModel {
   @HiveField(0)
   String? get id => throw _privateConstructorUsedError;
   @HiveField(1)
-  String? get title => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
   @HiveField(2)
   String? get description => throw _privateConstructorUsedError;
 
@@ -44,7 +44,7 @@ abstract class $TaskModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@HiveField(0) String? id,
-      @HiveField(1) String? title,
+      @HiveField(1) String title,
       @HiveField(2) String? description});
 }
 
@@ -64,7 +64,7 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
   @override
   $Res call({
     Object? id = freezed,
-    Object? title = freezed,
+    Object? title = null,
     Object? description = freezed,
   }) {
     return _then(_value.copyWith(
@@ -72,10 +72,10 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: freezed == title
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -94,7 +94,7 @@ abstract class _$$TaskModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@HiveField(0) String? id,
-      @HiveField(1) String? title,
+      @HiveField(1) String title,
       @HiveField(2) String? description});
 }
 
@@ -112,7 +112,7 @@ class __$$TaskModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? title = freezed,
+    Object? title = null,
     Object? description = freezed,
   }) {
     return _then(_$TaskModelImpl(
@@ -120,10 +120,10 @@ class __$$TaskModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: freezed == title
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -137,7 +137,7 @@ class __$$TaskModelImplCopyWithImpl<$Res>
 class _$TaskModelImpl implements _TaskModel {
   const _$TaskModelImpl(
       {@HiveField(0) this.id,
-      @HiveField(1) this.title,
+      @HiveField(1) required this.title,
       @HiveField(2) this.description});
 
   factory _$TaskModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -148,7 +148,7 @@ class _$TaskModelImpl implements _TaskModel {
   final String? id;
   @override
   @HiveField(1)
-  final String? title;
+  final String title;
   @override
   @HiveField(2)
   final String? description;
@@ -192,7 +192,7 @@ class _$TaskModelImpl implements _TaskModel {
 abstract class _TaskModel implements TaskModel {
   const factory _TaskModel(
       {@HiveField(0) final String? id,
-      @HiveField(1) final String? title,
+      @HiveField(1) required final String title,
       @HiveField(2) final String? description}) = _$TaskModelImpl;
 
   factory _TaskModel.fromJson(Map<String, dynamic> json) =
@@ -203,7 +203,7 @@ abstract class _TaskModel implements TaskModel {
   String? get id;
   @override
   @HiveField(1)
-  String? get title;
+  String get title;
   @override
   @HiveField(2)
   String? get description;

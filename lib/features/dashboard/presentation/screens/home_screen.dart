@@ -22,9 +22,7 @@ class HomeScreen extends StatelessWidget {
           },
           child: ListView.builder(
             itemCount: state.tasks.length,
-            itemBuilder: (context, index) => Text(
-              state.tasks[index].title ?? "N/A",
-            ),
+            itemBuilder: (context, index) => Text(state.tasks[index].title),
           ),
         );
       },

@@ -18,7 +18,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
     };
     return TaskModel(
       id: fields[0] as String?,
-      title: fields[1] as String?,
+      title: fields[1] as String,
       description: fields[2] as String?,
     );
   }
@@ -53,7 +53,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
 _$TaskModelImpl _$$TaskModelImplFromJson(Map<String, dynamic> json) =>
     _$TaskModelImpl(
       id: json['id'] as String?,
-      title: json['title'] as String?,
+      title: json['title'] as String,
       description: json['description'] as String?,
     );
 
