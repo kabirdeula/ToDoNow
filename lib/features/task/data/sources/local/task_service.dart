@@ -9,7 +9,7 @@ class TaskService {
     _box = HiveUtil.openHiveBox<TaskModel>('tasks');
   }
 
-  Future<void> addTask(TaskModel task) async {
+  Future<void> addTask({required TaskModel task}) async {
     try {
       final box = await _box;
       await box.add(task);
