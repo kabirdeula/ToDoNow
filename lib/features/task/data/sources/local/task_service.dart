@@ -37,11 +37,17 @@ class TaskService {
     }
   }
 
-  Future<void> deleteSelectedTasks() async {
+  Future<void> deleteSelectedTasks(
+      {required Set<String> selectedTaskIds}) async {
     try {
       final box = await _box;
-      final tasks = box.values.toList();
-      await box.deleteAll(tasks.map((task) => task.id!).toList());
+      final tasks = box.toMap();
+      final keysToDelete = tasks.entries
+          .where((entry) => selectedTaskIds.contains(entry.value.id))
+          .map((entry) => entry.key)
+          .toList();
+      await box.deleteAll(keysToDelete);
+      log.i("(Task Service) Deleted selected tasks: $keysToDelete");
     } catch (e) {
       log.e("(Task Service) Error deleting selected tasks: $e");
     }
