@@ -4,11 +4,13 @@ import 'package:to_do_now/core/utils/utils.dart';
 class TaskListTile extends StatelessWidget {
   final String title;
   final DateTime? time;
+  final Widget? trailing;
 
   const TaskListTile({
     super.key,
     required this.title,
     this.time,
+    this.trailing,
   });
 
   @override
@@ -22,11 +24,21 @@ class TaskListTile extends StatelessWidget {
         ),
         color: Colors.white10,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title),
-          Text(formatDateTime(time ?? DateTime.now())),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title),
+              Text(formatDateTime(time ?? DateTime.now())),
+            ],
+          ),
+          trailing ??
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.more_vert_outlined),
+              ),
         ],
       ),
     );

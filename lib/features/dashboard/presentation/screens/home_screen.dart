@@ -24,10 +24,32 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: ListView.builder(
               itemCount: state.tasks.length,
-              itemBuilder: (context, index) => TaskListTile(
-                title: state.tasks[index].title,
-                time: state.tasks[index].dueDateTime,
-              ),
+              itemBuilder: (context, index) {
+                final task = state.tasks[index];
+                final isSelected = state.selectedTasks.contains(task.id);
+
+                return GestureDetector(
+                  onLongPress: () =>
+                      context.read<TaskCubit>().toggleSelection(task.id!),
+                  onTap: () {
+                    if (state.isSelectionMode) {
+                      context.read<TaskCubit>().toggleSelection(task.id!);
+                    }
+                  },
+                  child: TaskListTile(
+                    title: state.tasks[index].title,
+                    time: state.tasks[index].dueDateTime,
+                    trailing: state.isSelectionMode
+                        ? Checkbox(
+                            value: isSelected,
+                            onChanged: (_) => context
+                                .read<TaskCubit>()
+                                .toggleSelection(task.id!),
+                          )
+                        : null,
+                  ),
+                );
+              },
             ),
           ),
         );
