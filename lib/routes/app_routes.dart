@@ -6,6 +6,7 @@ enum AppRoutes {
   register('/register'),
   onboarding('/onboarding'),
   emptyHomeScreen('/empty_home_screen'),
+  taskScreen('/task_screen'),
   ;
 
   final String path;
