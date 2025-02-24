@@ -68,4 +68,14 @@ class TaskCubit extends Cubit<TaskState> {
       log.e("(Task Cubit) Error deleting selected tasks: $e");
     }
   }
+
+  void deleteTask(TaskModel task) async {
+    try {
+      await _usecase.deleteTask(task: task);
+      loadTasks();
+      log.i("(Task Cubit) Selected task deleted successfully.");
+    } catch (e) {
+      log.e("(Task Cubit) Error deleting selected task: $e");
+    }
+  }
 }
