@@ -31,7 +31,15 @@ class TaskService {
   Future<void> deleteTask({required TaskModel task}) async {
     try {
       final box = await _box;
-      await box.delete(task.id!);
+      final keyToDelete = box.keys
+          .firstWhere((key) => box.get(key)?.id == task.id, orElse: () => null);
+
+      if (keyToDelete != null) {
+        await box.delete(keyToDelete);
+        log.i("(Task Service) Task deleted successfully: ${task.id}");
+      } else {
+        log.e("(Task Service) Task ID not found in Hive: ${task.id}");
+      }
     } catch (e) {
       log.e("(Task Service) Error deleting task: $e");
     }

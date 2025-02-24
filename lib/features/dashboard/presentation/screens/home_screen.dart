@@ -39,14 +39,10 @@ class HomeScreen extends StatelessWidget {
                   child: TaskListTile(
                     title: state.tasks[index].title,
                     time: state.tasks[index].dueDateTime,
-                    trailing: state.isSelectionMode
-                        ? Checkbox(
-                            value: isSelected,
-                            onChanged: (_) => context
-                                .read<TaskCubit>()
-                                .toggleSelection(task.id!),
-                          )
-                        : null,
+                    isSelectionMode: state.isSelectionMode,
+                    value: isSelected,
+                    id: task.id!,
+                    task: task,
                   ),
                 );
               },
