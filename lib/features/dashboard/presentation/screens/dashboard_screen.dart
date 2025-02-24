@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_now/core/widgets/widgets.dart';
 import 'package:to_do_now/features/dashboard/dashboard.dart';
+import 'package:to_do_now/features/task/task.dart';
 
 class DashboardScreen extends StatelessWidget with DashboardMixin {
   DashboardScreen({super.key});
@@ -13,6 +15,20 @@ class DashboardScreen extends StatelessWidget with DashboardMixin {
         leading: Icon(Icons.menu),
         title: Text('Hello'),
         actions: [
+          BlocBuilder<TaskCubit, TaskState>(
+            builder: (context, state) {
+              if (state.selectedTasks.isEmpty) {
+                return SizedBox.shrink();
+              } else {
+                return IconButton(
+                  onPressed: () {
+                    context.read<TaskCubit>().deleteSelectedTasks();
+                  },
+                  icon: Icon(Icons.delete),
+                );
+              }
+            },
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: CircleAvatar(child: Icon(Icons.person)),

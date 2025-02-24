@@ -50,5 +50,22 @@ class TaskCubit extends Cubit<TaskState> {
     emit(state.copyWith(selectedTasks: {}, isSelectionMode: false));
   }
 
-  void deleteSelectedTasks() {}
+  void deleteSelectedTasks() async {
+    if (state.selectedTasks.isEmpty) return;
+
+    try {
+      await _usecase.deleteSelectedTasks(state.selectedTasks);
+      final updatedTasks = await _usecase.getTasks();
+
+      emit(state.copyWith(
+        tasks: updatedTasks,
+        selectedTasks: {},
+        isSelectionMode: false,
+      ));
+
+      log.i("(Task Cubit) Selected tasks deleted successfully.");
+    } catch (e) {
+      log.e("(Task Cubit) Error deleting selected tasks: $e");
+    }
+  }
 }

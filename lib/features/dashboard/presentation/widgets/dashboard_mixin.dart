@@ -15,9 +15,8 @@ mixin DashboardMixin {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
-  late final DateTime? _selectedDateTIme;
-
   void createTask(BuildContext context) {
+    DateTime? selectedDateTIme = DateTime.now();
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.background,
@@ -54,8 +53,11 @@ mixin DashboardMixin {
                       children: [
                         IconButton(
                           icon: Icon(Icons.timer_outlined),
-                          onPressed: () async =>
-                              _selectedDateTIme = await _pickDateTime(context),
+                          onPressed: () async {
+                            DateTime? pickedDateTime =
+                                await _pickDateTime(context);
+                            selectedDateTIme = pickedDateTime ?? DateTime.now();
+                          },
                         ),
                         Icon(Icons.sell_outlined),
                         Icon(Icons.flag_outlined),
@@ -64,11 +66,12 @@ mixin DashboardMixin {
                     IconButton(
                       onPressed: () {
                         var uuid = Uuid();
+
                         final task = TaskModel(
                           id: uuid.v4(),
                           title: titleController.text,
                           description: descriptionController.text,
-                          dueDateTime: _selectedDateTIme,
+                          dueDateTime: selectedDateTIme,
                         );
 
                         log.d("(Dashboard) New Task: $task");
