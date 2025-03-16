@@ -46,11 +46,34 @@ class TaskModel with _$TaskModel {
           .toList(),
     );
   }
+
+  TaskEntity toEntity() {
+    return TaskEntity(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      createdAt: createdAt,
+      dueDate: dueDate,
+      completedAt: completedAt,
+      categoryId: categoryId,
+      priority: priority,
+      isCompleted: isCompleted,
+      subtasks: subTasks
+          .map((e) => SubTaskEntity(
+                id: e.id,
+                title: e.title,
+                isCompleted: e.isCompleted,
+              ))
+          .toList(),
+    );
+  }
 }
 
 @HiveType(typeId: 2)
 @freezed
 class SubTaskModel with _$SubTaskModel {
+  const SubTaskModel._();
+
   const factory SubTaskModel({
     @HiveField(0) required String id,
     @HiveField(1) required String title,
@@ -59,4 +82,16 @@ class SubTaskModel with _$SubTaskModel {
 
   factory SubTaskModel.fromJson(Map<String, dynamic> json) =>
       _$SubTaskModelFromJson(json);
+
+  factory SubTaskModel.fromEntity(SubTaskEntity entity) {
+    return SubTaskModel(
+      id: entity.id,
+      title: entity.title,
+      isCompleted: entity.isCompleted,
+    );
+  }
+
+  SubTaskEntity toEntity() {
+    return SubTaskEntity(id: id, title: title, isCompleted: isCompleted);
+  }
 }

@@ -525,11 +525,12 @@ class __$$SubTaskModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SubTaskModelImpl implements _SubTaskModel {
+class _$SubTaskModelImpl extends _SubTaskModel {
   const _$SubTaskModelImpl(
       {@HiveField(0) required this.id,
       @HiveField(1) required this.title,
-      @HiveField(2) this.isCompleted = false});
+      @HiveField(2) this.isCompleted = false})
+      : super._();
 
   factory _$SubTaskModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SubTaskModelImplFromJson(json);
@@ -581,11 +582,12 @@ class _$SubTaskModelImpl implements _SubTaskModel {
   }
 }
 
-abstract class _SubTaskModel implements SubTaskModel {
+abstract class _SubTaskModel extends SubTaskModel {
   const factory _SubTaskModel(
       {@HiveField(0) required final String id,
       @HiveField(1) required final String title,
       @HiveField(2) final bool isCompleted}) = _$SubTaskModelImpl;
+  const _SubTaskModel._() : super._();
 
   factory _SubTaskModel.fromJson(Map<String, dynamic> json) =
       _$SubTaskModelImpl.fromJson;
