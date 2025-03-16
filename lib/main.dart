@@ -7,6 +7,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'core/di/di.dart';
 import 'core/themes/themes.dart';
 import 'features/authentication/authentication.dart';
+import 'features/dashboard/dashboard.dart';
 import 'features/onboarding/onboarding.dart';
 import 'features/settings/settings.dart';
 import 'features/task/task.dart';
@@ -29,6 +30,7 @@ void main() async {
       BlocProvider(create: (context) => sl<OnboardingCubit>()),
       BlocProvider(create: (context) => sl<AuthCubit>()),
       BlocProvider(create: (context) => sl<TaskCubit>()),
+      BlocProvider(create: (context) => sl<DashboardCubit>()),
     ],
     child: const MyApp(),
   ));

@@ -6,6 +6,8 @@ import 'package:to_do_now/features/onboarding/onboarding.dart';
 import 'package:to_do_now/features/settings/settings.dart';
 import 'package:to_do_now/features/task/task.dart';
 
+import '../../features/dashboard/dashboard.dart';
+
 final sl = GetIt.instance;
 
 void setupDependencyInjection() {
@@ -19,6 +21,7 @@ void setupCubitInjection() {
   sl.registerSingleton<OnboardingCubit>(OnboardingCubit());
   sl.registerSingleton<AuthCubit>(AuthCubit());
   sl.registerSingleton<TaskCubit>(TaskCubit());
+  sl.registerSingleton<DashboardCubit>(DashboardCubit());
 }
 
 void setupRepositoryInjection() {

@@ -7,6 +7,8 @@ import 'package:to_do_now/features/authentication/authentication.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
+  final AuthRepository _repository = sl<AuthRepository>();
+
   AuthCubit() : super(AuthState.initial());
 
   void checkUserStatus() async {}
@@ -87,4 +89,9 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void resetState() => emit(AuthState.initial());
+
+  Future<void> logout() async {
+    await _repository.logout();
+    emit(AuthState.initial());
+  }
 }

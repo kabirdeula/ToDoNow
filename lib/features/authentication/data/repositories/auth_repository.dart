@@ -14,4 +14,9 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<AuthResponse> register({required UserModel user}) async {
     return await sl<AuthService>().register(user: user);
   }
+
+  @override
+  Future<void> logout() async {
+    await sl<AuthService>().signOut();
+  }
 }
