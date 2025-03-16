@@ -5,6 +5,7 @@ import 'package:to_do_now/features/dashboard/dashboard.dart';
 import 'package:to_do_now/features/onboarding/onboarding.dart';
 import 'package:to_do_now/features/settings/settings.dart';
 import 'package:to_do_now/features/start/start.dart';
+import 'package:to_do_now/features/task/task.dart';
 
 import 'routes.dart';
 
@@ -64,6 +65,11 @@ class AppRouter {
         path: AppRoutes.emptyHomeScreen.path,
         name: AppRoutes.emptyHomeScreen.name,
         builder: (context, index) => const EmptyHomeScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.taskScreen.path,
+        name: AppRoutes.taskScreen.name,
+        builder: (context, index) => const TaskScreen(),
       ),
     ],
   );

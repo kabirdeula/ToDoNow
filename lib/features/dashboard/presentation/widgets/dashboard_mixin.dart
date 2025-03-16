@@ -36,6 +36,7 @@ mixin DashboardMixin {
                   fillColor: Colors.transparent,
                   hintText: "Title",
                   textCapitalization: TextCapitalization.sentences,
+                  textInputAction: TextInputAction.next,
                 ),
                 CustomTextFormField(
                   name: 'description',

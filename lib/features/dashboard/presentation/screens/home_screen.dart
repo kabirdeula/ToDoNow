@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_now/features/dashboard/dashboard.dart';
 import 'package:to_do_now/features/task/task.dart';
+import 'package:to_do_now/routes/routes.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -34,6 +35,8 @@ class HomeScreen extends StatelessWidget {
                   onTap: () {
                     if (state.isSelectionMode) {
                       context.read<TaskCubit>().toggleSelection(task.id!);
+                    } else {
+                      context.push(AppRoutes.taskScreen.path);
                     }
                   },
                   child: TaskListTile(
