@@ -11,6 +11,7 @@ import 'features/dashboard/dashboard.dart';
 import 'features/onboarding/onboarding.dart';
 import 'features/settings/settings.dart';
 import 'features/task/task.dart';
+import 'features/user/user.dart';
 import 'firebase_options.dart';
 import 'routes/routes.dart';
 
@@ -20,6 +21,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(SettingsModelAdapter());
   Hive.registerAdapter(TaskModelAdapter());
+  Hive.registerAdapter(UserModelAdapter());
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 

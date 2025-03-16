@@ -20,12 +20,22 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserModel {
+  @HiveField(0)
   String get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String? get username => throw _privateConstructorUsedError;
+  @HiveField(2)
   String get email => throw _privateConstructorUsedError;
+  @HiveField(3)
   String? get name => throw _privateConstructorUsedError;
+  @HiveField(4)
   String? get profilePicture => throw _privateConstructorUsedError;
+  @HiveField(5)
   DateTime get createdAt => throw _privateConstructorUsedError;
+  @HiveField(6)
+  int get completedTasks => throw _privateConstructorUsedError;
+  @HiveField(7)
+  int get pendingTasks => throw _privateConstructorUsedError;
 
   /// Serializes this UserModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,12 +53,14 @@ abstract class $UserModelCopyWith<$Res> {
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
   $Res call(
-      {String id,
-      String? username,
-      String email,
-      String? name,
-      String? profilePicture,
-      DateTime createdAt});
+      {@HiveField(0) String id,
+      @HiveField(1) String? username,
+      @HiveField(2) String email,
+      @HiveField(3) String? name,
+      @HiveField(4) String? profilePicture,
+      @HiveField(5) DateTime createdAt,
+      @HiveField(6) int completedTasks,
+      @HiveField(7) int pendingTasks});
 }
 
 /// @nodoc
@@ -72,6 +84,8 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? name = freezed,
     Object? profilePicture = freezed,
     Object? createdAt = null,
+    Object? completedTasks = null,
+    Object? pendingTasks = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -98,6 +112,14 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      completedTasks: null == completedTasks
+          ? _value.completedTasks
+          : completedTasks // ignore: cast_nullable_to_non_nullable
+              as int,
+      pendingTasks: null == pendingTasks
+          ? _value.pendingTasks
+          : pendingTasks // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -111,12 +133,14 @@ abstract class _$$UserModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
-      String? username,
-      String email,
-      String? name,
-      String? profilePicture,
-      DateTime createdAt});
+      {@HiveField(0) String id,
+      @HiveField(1) String? username,
+      @HiveField(2) String email,
+      @HiveField(3) String? name,
+      @HiveField(4) String? profilePicture,
+      @HiveField(5) DateTime createdAt,
+      @HiveField(6) int completedTasks,
+      @HiveField(7) int pendingTasks});
 }
 
 /// @nodoc
@@ -138,6 +162,8 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? name = freezed,
     Object? profilePicture = freezed,
     Object? createdAt = null,
+    Object? completedTasks = null,
+    Object? pendingTasks = null,
   }) {
     return _then(_$UserModelImpl(
       id: null == id
@@ -164,6 +190,14 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      completedTasks: null == completedTasks
+          ? _value.completedTasks
+          : completedTasks // ignore: cast_nullable_to_non_nullable
+              as int,
+      pendingTasks: null == pendingTasks
+          ? _value.pendingTasks
+          : pendingTasks // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -172,33 +206,49 @@ class __$$UserModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserModelImpl extends _UserModel {
   const _$UserModelImpl(
-      {required this.id,
-      this.username,
-      required this.email,
-      this.name,
-      this.profilePicture,
-      required this.createdAt})
+      {@HiveField(0) required this.id,
+      @HiveField(1) this.username,
+      @HiveField(2) required this.email,
+      @HiveField(3) this.name,
+      @HiveField(4) this.profilePicture,
+      @HiveField(5) required this.createdAt,
+      @HiveField(6) this.completedTasks = 0,
+      @HiveField(7) this.pendingTasks = 0})
       : super._();
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
 
   @override
+  @HiveField(0)
   final String id;
   @override
+  @HiveField(1)
   final String? username;
   @override
+  @HiveField(2)
   final String email;
   @override
+  @HiveField(3)
   final String? name;
   @override
+  @HiveField(4)
   final String? profilePicture;
   @override
+  @HiveField(5)
   final DateTime createdAt;
+  @override
+  @JsonKey()
+  @HiveField(6)
+  final int completedTasks;
+  @override
+  @JsonKey()
+  @HiveField(7)
+  final int pendingTasks;
 
   @override
   String toString() {
-    return 'UserModel(id: $id, username: $username, email: $email, name: $name, profilePicture: $profilePicture, createdAt: $createdAt)';
+    return 'UserModel(id: $id, username: $username, email: $email, name: $name, profilePicture: $profilePicture, createdAt: $createdAt, completedTasks: $completedTasks, pendingTasks: $pendingTasks)';
   }
 
   @override
@@ -214,13 +264,17 @@ class _$UserModelImpl extends _UserModel {
             (identical(other.profilePicture, profilePicture) ||
                 other.profilePicture == profilePicture) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+                other.createdAt == createdAt) &&
+            (identical(other.completedTasks, completedTasks) ||
+                other.completedTasks == completedTasks) &&
+            (identical(other.pendingTasks, pendingTasks) ||
+                other.pendingTasks == pendingTasks));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, username, email, name, profilePicture, createdAt);
+  int get hashCode => Object.hash(runtimeType, id, username, email, name,
+      profilePicture, createdAt, completedTasks, pendingTasks);
 
   /// Create a copy of UserModel
   /// with the given fields replaced by the non-null parameter values.
@@ -240,29 +294,43 @@ class _$UserModelImpl extends _UserModel {
 
 abstract class _UserModel extends UserModel {
   const factory _UserModel(
-      {required final String id,
-      final String? username,
-      required final String email,
-      final String? name,
-      final String? profilePicture,
-      required final DateTime createdAt}) = _$UserModelImpl;
+      {@HiveField(0) required final String id,
+      @HiveField(1) final String? username,
+      @HiveField(2) required final String email,
+      @HiveField(3) final String? name,
+      @HiveField(4) final String? profilePicture,
+      @HiveField(5) required final DateTime createdAt,
+      @HiveField(6) final int completedTasks,
+      @HiveField(7) final int pendingTasks}) = _$UserModelImpl;
   const _UserModel._() : super._();
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
 
   @override
+  @HiveField(0)
   String get id;
   @override
+  @HiveField(1)
   String? get username;
   @override
+  @HiveField(2)
   String get email;
   @override
+  @HiveField(3)
   String? get name;
   @override
+  @HiveField(4)
   String? get profilePicture;
   @override
+  @HiveField(5)
   DateTime get createdAt;
+  @override
+  @HiveField(6)
+  int get completedTasks;
+  @override
+  @HiveField(7)
+  int get pendingTasks;
 
   /// Create a copy of UserModel
   /// with the given fields replaced by the non-null parameter values.

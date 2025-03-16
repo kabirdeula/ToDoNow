@@ -1,21 +1,25 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../user.dart';
 
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
 
+@HiveType(typeId: 0)
 @freezed
 class UserModel with _$UserModel {
   const UserModel._();
 
   const factory UserModel({
-    required String id,
-    String? username,
-    required String email,
-    String? name,
-    String? profilePicture,
-    required DateTime createdAt,
+    @HiveField(0) required String id,
+    @HiveField(1) String? username,
+    @HiveField(2) required String email,
+    @HiveField(3) String? name,
+    @HiveField(4) String? profilePicture,
+    @HiveField(5) required DateTime createdAt,
+    @HiveField(6) @Default(0) int completedTasks,
+    @HiveField(7) @Default(0) int pendingTasks,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
