@@ -232,7 +232,7 @@ class __$$TaskModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$TaskModelImpl implements _TaskModel {
+class _$TaskModelImpl extends _TaskModel {
   const _$TaskModelImpl(
       {@HiveField(0) required this.id,
       @HiveField(1) required this.title,
@@ -244,7 +244,8 @@ class _$TaskModelImpl implements _TaskModel {
       @HiveField(7) this.priority = 1,
       @HiveField(8) this.isCompleted = false,
       @HiveField(9) final List<SubTaskModel> subTasks = const []})
-      : _subTasks = subTasks;
+      : _subTasks = subTasks,
+        super._();
 
   factory _$TaskModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskModelImplFromJson(json);
@@ -347,7 +348,7 @@ class _$TaskModelImpl implements _TaskModel {
   }
 }
 
-abstract class _TaskModel implements TaskModel {
+abstract class _TaskModel extends TaskModel {
   const factory _TaskModel(
       {@HiveField(0) required final String id,
       @HiveField(1) required final String title,
@@ -359,6 +360,7 @@ abstract class _TaskModel implements TaskModel {
       @HiveField(7) final int priority,
       @HiveField(8) final bool isCompleted,
       @HiveField(9) final List<SubTaskModel> subTasks}) = _$TaskModelImpl;
+  const _TaskModel._() : super._();
 
   factory _TaskModel.fromJson(Map<String, dynamic> json) =
       _$TaskModelImpl.fromJson;

@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:to_do_now/features/task/task.dart';
 
 part 'task_model.freezed.dart';
 part 'task_model.g.dart';
@@ -7,6 +8,8 @@ part 'task_model.g.dart';
 @HiveType(typeId: 1)
 @freezed
 class TaskModel with _$TaskModel {
+  const TaskModel._();
+
   const factory TaskModel({
     @HiveField(0) required String id,
     @HiveField(1) required String title,
@@ -22,6 +25,27 @@ class TaskModel with _$TaskModel {
 
   factory TaskModel.fromJson(Map<String, dynamic> json) =>
       _$TaskModelFromJson(json);
+
+  factory TaskModel.fromEntity(TaskEntity entity) {
+    return TaskModel(
+      id: entity.id,
+      title: entity.title,
+      subtitle: entity.subtitle,
+      createdAt: entity.createdAt,
+      dueDate: entity.dueDate,
+      completedAt: entity.completedAt,
+      categoryId: entity.categoryId,
+      priority: entity.priority,
+      isCompleted: entity.isCompleted,
+      subTasks: entity.subtasks
+          .map((e) => SubTaskModel(
+                id: e.id,
+                title: e.title,
+                isCompleted: e.isCompleted,
+              ))
+          .toList(),
+    );
+  }
 }
 
 @HiveType(typeId: 2)

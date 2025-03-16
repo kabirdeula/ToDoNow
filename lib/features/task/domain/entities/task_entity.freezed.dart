@@ -20,7 +20,7 @@ mixin _$TaskEntity {
   String get title => throw _privateConstructorUsedError;
   String? get subtitle => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  DateTime get dueDate => throw _privateConstructorUsedError;
   DateTime? get completedAt => throw _privateConstructorUsedError;
   String get categoryId => throw _privateConstructorUsedError;
   int get priority => throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ abstract class $TaskEntityCopyWith<$Res> {
       String title,
       String? subtitle,
       DateTime createdAt,
-      DateTime updatedAt,
+      DateTime dueDate,
       DateTime? completedAt,
       String categoryId,
       int priority,
@@ -72,7 +72,7 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
     Object? title = null,
     Object? subtitle = freezed,
     Object? createdAt = null,
-    Object? updatedAt = null,
+    Object? dueDate = null,
     Object? completedAt = freezed,
     Object? categoryId = null,
     Object? priority = null,
@@ -96,9 +96,9 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
+      dueDate: null == dueDate
+          ? _value.dueDate
+          : dueDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       completedAt: freezed == completedAt
           ? _value.completedAt
@@ -137,7 +137,7 @@ abstract class _$$TaskEntityImplCopyWith<$Res>
       String title,
       String? subtitle,
       DateTime createdAt,
-      DateTime updatedAt,
+      DateTime dueDate,
       DateTime? completedAt,
       String categoryId,
       int priority,
@@ -162,7 +162,7 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
     Object? title = null,
     Object? subtitle = freezed,
     Object? createdAt = null,
-    Object? updatedAt = null,
+    Object? dueDate = null,
     Object? completedAt = freezed,
     Object? categoryId = null,
     Object? priority = null,
@@ -186,9 +186,9 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
+      dueDate: null == dueDate
+          ? _value.dueDate
+          : dueDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       completedAt: freezed == completedAt
           ? _value.completedAt
@@ -222,7 +222,7 @@ class _$TaskEntityImpl implements _TaskEntity {
       required this.title,
       this.subtitle,
       required this.createdAt,
-      required this.updatedAt,
+      required this.dueDate,
       this.completedAt,
       required this.categoryId,
       required this.priority,
@@ -239,7 +239,7 @@ class _$TaskEntityImpl implements _TaskEntity {
   @override
   final DateTime createdAt;
   @override
-  final DateTime updatedAt;
+  final DateTime dueDate;
   @override
   final DateTime? completedAt;
   @override
@@ -258,7 +258,7 @@ class _$TaskEntityImpl implements _TaskEntity {
 
   @override
   String toString() {
-    return 'TaskEntity(id: $id, title: $title, subtitle: $subtitle, createdAt: $createdAt, updatedAt: $updatedAt, completedAt: $completedAt, categoryId: $categoryId, priority: $priority, isCompleted: $isCompleted, subtasks: $subtasks)';
+    return 'TaskEntity(id: $id, title: $title, subtitle: $subtitle, createdAt: $createdAt, dueDate: $dueDate, completedAt: $completedAt, categoryId: $categoryId, priority: $priority, isCompleted: $isCompleted, subtasks: $subtasks)';
   }
 
   @override
@@ -272,8 +272,7 @@ class _$TaskEntityImpl implements _TaskEntity {
                 other.subtitle == subtitle) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
+            (identical(other.dueDate, dueDate) || other.dueDate == dueDate) &&
             (identical(other.completedAt, completedAt) ||
                 other.completedAt == completedAt) &&
             (identical(other.categoryId, categoryId) ||
@@ -292,7 +291,7 @@ class _$TaskEntityImpl implements _TaskEntity {
       title,
       subtitle,
       createdAt,
-      updatedAt,
+      dueDate,
       completedAt,
       categoryId,
       priority,
@@ -314,7 +313,7 @@ abstract class _TaskEntity implements TaskEntity {
       required final String title,
       final String? subtitle,
       required final DateTime createdAt,
-      required final DateTime updatedAt,
+      required final DateTime dueDate,
       final DateTime? completedAt,
       required final String categoryId,
       required final int priority,
@@ -330,7 +329,7 @@ abstract class _TaskEntity implements TaskEntity {
   @override
   DateTime get createdAt;
   @override
-  DateTime get updatedAt;
+  DateTime get dueDate;
   @override
   DateTime? get completedAt;
   @override

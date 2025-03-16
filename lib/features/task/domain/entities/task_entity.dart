@@ -11,7 +11,7 @@ class TaskEntity with _$TaskEntity {
     required String title,
     String? subtitle,
     required DateTime createdAt,
-    required DateTime updatedAt,
+    required DateTime dueDate,
     DateTime? completedAt,
     required String categoryId,
     required int priority,
