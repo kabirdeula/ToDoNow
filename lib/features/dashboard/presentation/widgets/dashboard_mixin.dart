@@ -1,6 +1,10 @@
+// TODO: Remove after fixing
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:uuid/uuid.dart';
 
 import 'package:to_do_now/core/constants/constants.dart';
 import 'package:to_do_now/core/themes/themes.dart';
@@ -8,7 +12,6 @@ import 'package:to_do_now/core/utils/utils.dart';
 import 'package:to_do_now/core/widgets/widgets.dart';
 import 'package:to_do_now/features/task/task.dart';
 import 'package:to_do_now/routes/routes.dart';
-import 'package:uuid/uuid.dart';
 
 mixin DashboardMixin {
   final formKey = GlobalKey<FormBuilderState>();
@@ -67,17 +70,17 @@ mixin DashboardMixin {
                     IconButton(
                       onPressed: () {
                         var uuid = Uuid();
+                        // TODO: fix
+                        // final task = TaskModel(
+                        //   id: uuid.v4(),
+                        //   title: titleController.text,
+                        //   description: descriptionController.text,
+                        //   dueDateTime: selectedDateTIme,
+                        // );
 
-                        final task = TaskModel(
-                          id: uuid.v4(),
-                          title: titleController.text,
-                          description: descriptionController.text,
-                          dueDateTime: selectedDateTIme,
-                        );
+                        // log.d("(Dashboard) New Task: $task");
 
-                        log.d("(Dashboard) New Task: $task");
-
-                        context.read<TaskCubit>().addTask(task);
+                        // context.read<TaskCubit>().addTask(task);
 
                         titleController.clear();
                         descriptionController.clear();

@@ -56,20 +56,20 @@ class HomeScreen extends StatelessWidget {
 
                   return GestureDetector(
                     onLongPress: () =>
-                        context.read<TaskCubit>().toggleSelection(task.id!),
+                        context.read<TaskCubit>().toggleSelection(task.id),
                     onTap: () {
                       if (state.isSelectionMode) {
-                        context.read<TaskCubit>().toggleSelection(task.id!);
+                        context.read<TaskCubit>().toggleSelection(task.id);
                       } else {
                         context.push(AppRoutes.taskScreen.path);
                       }
                     },
                     child: TaskListTile(
                       title: state.tasks[index].title,
-                      time: state.tasks[index].dueDateTime,
+                      time: state.tasks[index].dueDate,
                       isSelectionMode: state.isSelectionMode,
                       value: isSelected,
-                      id: task.id!,
+                      id: task.id,
                       task: task,
                     ),
                   );

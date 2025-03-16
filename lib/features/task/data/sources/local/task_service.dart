@@ -64,7 +64,7 @@ class TaskService {
   Future<void> updateTask({required TaskModel task}) async {
     try {
       final box = await _box;
-      await box.put(task.id!, task);
+      await box.put(task.id, task);
     } catch (e) {
       log.e("(Task Service) Error updating task: $e");
     }
