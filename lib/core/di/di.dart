@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 
 import 'package:to_do_now/features/authentication/authentication.dart';
 import 'package:to_do_now/features/onboarding/onboarding.dart';
-import 'package:to_do_now/features/settings/settings.dart';
+// import 'package:to_do_now/features/settings/settings.dart';
 import 'package:to_do_now/features/task/task.dart';
 
 import '../../features/dashboard/dashboard.dart';
@@ -31,7 +31,7 @@ void setupRepositoryInjection() {
 
 void setupServiceInjection() async {
   sl.registerSingleton<AuthService>(AuthService());
-  sl.registerSingleton<SettingsService>(SettingsService());
+  // sl.registerSingleton<SettingsService>(SettingsService());
   sl.registerSingleton<FirebaseAuth>(FirebaseAuth.instance);
   sl.registerSingleton<TaskService>(TaskService());
 }

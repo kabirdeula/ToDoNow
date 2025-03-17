@@ -9,7 +9,7 @@ import 'core/themes/themes.dart';
 import 'features/authentication/authentication.dart';
 import 'features/dashboard/dashboard.dart';
 import 'features/onboarding/onboarding.dart';
-import 'features/settings/settings.dart';
+// import 'features/settings/settings.dart';
 import 'features/task/task.dart';
 import 'features/user/user.dart';
 import 'firebase_options.dart';
@@ -19,7 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Hive.initFlutter();
-  Hive.registerAdapter(SettingsModelAdapter());
+  // Hive.registerAdapter(SettingsModelAdapter());
   Hive.registerAdapter(TaskModelAdapter());
   Hive.registerAdapter(UserModelAdapter());
 
