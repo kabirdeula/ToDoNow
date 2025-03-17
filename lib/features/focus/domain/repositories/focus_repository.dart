@@ -1,7 +1,6 @@
 import '../../focus.dart';
 
 abstract class FocusRepository {
-  Future<void> startFocusSession(FocusSessionEntity session);
-  Future<void> endFocusSession(String sessionId);
-  List<FocusSessionEntity> getFocusSessions();
+  Future<void> saveSession(FocusSessionEntity session);
+  Future<List<FocusSessionEntity>> getSessions();
 }
