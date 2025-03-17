@@ -23,3 +23,11 @@ class ListStrings {
     ),
   ];
 }
+
+class HiveConstants {
+  static const String userBox = 'userBox';
+  static const String taskBox = 'taskBox';
+  static const String categoryBox = 'categoryBox';
+  static const String focusSessionBox = 'focusSessionBox';
+  static const String settingsBox = 'settingsBox';
+}
