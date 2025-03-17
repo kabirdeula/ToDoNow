@@ -9,7 +9,7 @@ class TaskRemoteService {
   TaskRemoteService({FirebaseFirestore? firestore})
       : _firestore = firestore ?? FirebaseFirestore.instance;
 
-  Future<void> saveTask(TaskModel task) async {
+  Future<void> saveTask({required TaskModel task}) async {
     try {
       await _firestore.collection('tasks').doc(task.id).set(task.toJson());
       log.i("(Task Remote Service) Task saved successfully: ${task.id}");

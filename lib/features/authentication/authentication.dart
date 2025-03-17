@@ -1,7 +1,5 @@
 export './cubit/auth_cubit.dart';
-export './data/models/auth_response/auth_response.dart';
-export './data/models/user/user.dart';
-export './data/repositories/auth_repository.dart';
+export './data/repositories/auth_repository_impl.dart';
 export './data/sources/local/auth_local_service.dart';
 export './data/sources/remote/auth_remote_service.dart';
 export './domain/repositories/auth_repository.dart';

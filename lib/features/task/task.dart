@@ -1,6 +1,6 @@
 export './cubit/task_cubit.dart';
 export './data/models/task_model.dart';
-export './data/repository/task_repository.dart';
+export './data/repositories/task_repository_impl.dart';
 export './data/sources/local/task_local_service.dart';
 export './data/sources/remote/task_remote_service.dart';
 export './domain/entities/task_entity.dart';

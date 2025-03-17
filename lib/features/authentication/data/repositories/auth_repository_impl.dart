@@ -3,33 +3,49 @@ import 'package:to_do_now/features/user/domain/entities/user_entity.dart';
 import '../../authentication.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
+  final AuthRemoteService _remoteService;
+  final AuthLocalService _localService;
+
+  AuthRepositoryImpl({
+    AuthRemoteService? remoteService,
+    AuthLocalService? localService,
+  })  : _remoteService = remoteService ?? AuthRemoteService(),
+        _localService = localService ?? AuthLocalService();
+
   @override
-  UserEntity? getCurrentUser() {
-    // TODO: implement getCurrentUser
-    throw UnimplementedError();
+  Future<UserEntity?> getCurrentUser() async {
+    final cachedUser = await _localService.getCachedUser();
+    return cachedUser?.toEntity();
   }
 
   @override
-  Future<void> googleLogin() {
-    // TODO: implement googleLogin
-    throw UnimplementedError();
+  Future<void> googleLogin() async {
+    await _remoteService.signInWithGoogle();
   }
 
   @override
-  Future<UserEntity?> login(UserEntity user) {
-    // TODO: implement login
-    throw UnimplementedError();
+  Future<UserEntity?> login(String email, String password) async {
+    final userModel = await _remoteService.signInWithEmail(email, password);
+    if (userModel != null) {
+      await _localService.cacheUser(user: userModel);
+      return userModel.toEntity();
+    }
+    return null;
   }
 
   @override
-  Future<void> logout() {
-    // TODO: implement logout
-    throw UnimplementedError();
+  Future<void> logout() async {
+    await _remoteService.signOut();
+    await _localService.clearUser();
   }
 
   @override
-  Future<UserEntity> register(UserEntity user) {
-    // TODO: implement register
-    throw UnimplementedError();
+  Future<UserEntity?> register(String email, String password) async {
+    final userModel = await _remoteService.signUpWithEmail(email, password);
+    if (userModel != null) {
+      await _localService.cacheUser(user: userModel);
+      return userModel.toEntity();
+    }
+    return null;
   }
 }
