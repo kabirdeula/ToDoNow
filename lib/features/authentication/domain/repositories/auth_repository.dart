@@ -1,8 +1,9 @@
-import 'package:to_do_now/features/authentication/authentication.dart';
+import '../../../user/user.dart';
 
 abstract class AuthRepository {
-  Future<AuthResponse> login({required UserModel user});
-  Future googleLogin();
-  Future<AuthResponse> register({required UserModel user});
+  Future<UserEntity> register(UserEntity user);
+  Future<UserEntity?> login(UserEntity user);
+  Future<void> googleLogin();
   Future<void> logout();
+  UserEntity? getCurrentUser();
 }
