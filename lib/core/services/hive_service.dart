@@ -30,10 +30,6 @@ class HiveService {
     await Hive.openBox<AppSettingsModel>(HiveConstants.settingsBox);
   }
 
-  static Box<T> getBox<T>(String boxName) {
-    return Hive.box<T>(boxName);
-  }
-
   static Future<void> clearAllData() async {
     await Hive.box<UserModel>(HiveConstants.userBox).clear();
     await Hive.box<TaskModel>(HiveConstants.taskBox).clear();
