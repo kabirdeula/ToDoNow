@@ -1,7 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../task.dart';
-
 part 'task_entity.freezed.dart';
 
 @freezed
@@ -18,4 +16,13 @@ class TaskEntity with _$TaskEntity {
     required bool isCompleted,
     required List<SubTaskEntity> subtasks,
   }) = _TaskEntity;
+}
+
+@freezed
+class SubTaskEntity with _$SubTaskEntity {
+  const factory SubTaskEntity({
+    required String id,
+    required String title,
+    required bool isCompleted,
+  }) = _SubTaskEntity;
 }
