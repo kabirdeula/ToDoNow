@@ -1,12 +1,14 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:to_do_now/core/utils/utils.dart';
-import 'package:to_do_now/features/task/task.dart';
 
-class TaskService {
+import '../../../../../core/constants/constants.dart';
+import '../../../../../core/utils/utils.dart';
+import '../../../task.dart';
+
+class TaskLocalService {
   late final Future<Box<TaskModel>> _box;
 
-  TaskService() {
-    _box = HiveUtil.openHiveBox<TaskModel>('tasks');
+  TaskLocalService() {
+    _box = HiveUtil.openHiveBox<TaskModel>(HiveConstants.taskBox);
   }
 
   Future<void> addTask({required TaskModel task}) async {
@@ -18,30 +20,33 @@ class TaskService {
     }
   }
 
+  Future<void> saveTask({required TaskModel task}) async {
+    try {
+      final box = await _box;
+      await box.put(task.id, task);
+      log.i("(Task Local Service) Task saved successfully: ${task.id}");
+    } catch (e) {
+      log.e("(Task Local Service) Error saving task: $e");
+    }
+  }
+
   Future<List<TaskModel>> getTasks() async {
     try {
       final box = await _box;
       return box.values.toList();
     } catch (e) {
-      log.e("(Task Service) Error getting tasks: $e");
+      log.e("(Task Local Service) Error getting tasks: $e");
       return [];
     }
   }
 
-  Future<void> deleteTask({required TaskModel task}) async {
+  Future<void> deleteTask(String id) async {
     try {
       final box = await _box;
-      final keyToDelete = box.keys
-          .firstWhere((key) => box.get(key)?.id == task.id, orElse: () => null);
-
-      if (keyToDelete != null) {
-        await box.delete(keyToDelete);
-        log.i("(Task Service) Task deleted successfully: ${task.id}");
-      } else {
-        log.e("(Task Service) Task ID not found in Hive: ${task.id}");
-      }
+      await box.delete(id);
+      log.i("(Task Local Service) Task deleted successfully: $id");
     } catch (e) {
-      log.e("(Task Service) Error deleting task: $e");
+      log.e("(Task Local Service) Error deleting task: $e");
     }
   }
 
@@ -49,24 +54,13 @@ class TaskService {
       {required Set<String> selectedTaskIds}) async {
     try {
       final box = await _box;
-      final tasks = box.toMap();
-      final keysToDelete = tasks.entries
-          .where((entry) => selectedTaskIds.contains(entry.value.id))
-          .map((entry) => entry.key)
-          .toList();
+      final keysToDelete =
+          box.keys.where((key) => selectedTaskIds.contains(key)).toList();
+
       await box.deleteAll(keysToDelete);
       log.i("(Task Service) Deleted selected tasks: $keysToDelete");
     } catch (e) {
       log.e("(Task Service) Error deleting selected tasks: $e");
-    }
-  }
-
-  Future<void> updateTask({required TaskModel task}) async {
-    try {
-      final box = await _box;
-      await box.put(task.id, task);
-    } catch (e) {
-      log.e("(Task Service) Error updating task: $e");
     }
   }
 
