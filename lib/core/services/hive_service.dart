@@ -2,11 +2,11 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../features/category/category.dart';
-import '../../features/focus/data/models/focus_session_model.dart';
+import '../../features/focus/focus.dart';
 import '../../features/settings/settings.dart';
 import '../../features/task/task.dart';
 import '../../features/user/user.dart';
-import '../constants/constants.dart';
+import '../core.dart';
 
 class HiveService {
   static Future<void> init() async {

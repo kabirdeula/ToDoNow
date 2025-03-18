@@ -1,3 +1,4 @@
+import '../../../../app/di.dart';
 import '../../../user/user.dart';
 import '../../authentication.dart';
 
@@ -5,11 +6,9 @@ class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteService _remoteService;
   final AuthLocalService _localService;
 
-  AuthRepositoryImpl({
-    AuthRemoteService? remoteService,
-    AuthLocalService? localService,
-  })  : _remoteService = remoteService ?? AuthRemoteService(),
-        _localService = localService ?? AuthLocalService();
+  AuthRepositoryImpl()
+      : _remoteService = sl(),
+        _localService = sl();
 
   @override
   Future<UserEntity?> getCurrentUser() async {

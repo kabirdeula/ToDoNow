@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import 'package:to_do_now/core/widgets/widgets.dart';
-import 'package:to_do_now/features/authentication/authentication.dart';
+import '../../../../core/core.dart';
+import '../../authentication.dart';
 
 class AuthButton extends StatelessWidget {
   final String label;

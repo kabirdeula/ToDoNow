@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:to_do_now/core/widgets/widgets.dart';
-import 'package:to_do_now/features/authentication/authentication.dart';
+
+import '../../../../core/core.dart';
 
 class PasswordField extends StatelessWidget {
   final String? title;
@@ -12,8 +12,8 @@ class PasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
-      builder: (context, state) {
+    return BlocBuilder<PasswordVisibilityCubit, bool>(
+      builder: (context, isPasswordHidden) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -24,11 +24,12 @@ class PasswordField extends StatelessWidget {
               name: "password",
               controller: controller,
               validator: FormBuilderValidators.required(),
-              isObscureText: state.isObscureText,
+              isObscureText: isPasswordHidden,
               suffixIcon: IconButton(
-                onPressed: () => context.read<AuthCubit>().toggleObscureText(),
+                onPressed: () =>
+                    context.read<PasswordVisibilityCubit>().toggle(),
                 icon: Icon(
-                  state.isObscureText
+                  isPasswordHidden
                       ? Icons.visibility_off_outlined
                       : Icons.visibility_outlined,
                 ),

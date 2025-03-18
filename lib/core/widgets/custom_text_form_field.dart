@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:to_do_now/core/constants/constants.dart';
+
+import '../core.dart';
 
 /// A customizable `TextFormField` widget for consistent styling and functionality.
 ///

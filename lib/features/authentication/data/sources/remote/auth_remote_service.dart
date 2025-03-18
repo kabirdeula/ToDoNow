@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../../../../core/utils/utils.dart';
+import '../../../../../app/di.dart';
+import '../../../../../core/core.dart';
 import '../../../../user/user.dart';
 
 class AuthRemoteService {
@@ -10,13 +11,10 @@ class AuthRemoteService {
   final FirebaseFirestore _firestore;
   final GoogleSignIn _googleSignIn;
 
-  AuthRemoteService({
-    FirebaseAuth? firebaseAuth,
-    FirebaseFirestore? firestore,
-    GoogleSignIn? googleSignin,
-  })  : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
-        _firestore = firestore ?? FirebaseFirestore.instance,
-        _googleSignIn = googleSignin ?? GoogleSignIn();
+  AuthRemoteService()
+      : _firebaseAuth = sl(),
+        _firestore = sl(),
+        _googleSignIn = sl();
 
   Future<UserModel?> signUpWithEmail(String email, String password) async {
     try {

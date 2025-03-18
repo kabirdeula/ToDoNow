@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:to_do_now/core/widgets/widgets.dart';
-import 'package:to_do_now/features/authentication/authentication.dart';
+
+import '../../../../core/core.dart';
+import '../../authentication.dart';
 
 class SocialLoginButtons extends StatelessWidget {
   const SocialLoginButtons({super.key});
@@ -19,7 +20,7 @@ class SocialLoginButtons extends StatelessWidget {
                 label: 'login with google',
                 onPressed: () async {
                   EasyLoading.show(status: "Logging in...");
-                  await context.read<AuthCubit>().googleLogin();
+                  await context.read<AuthCubit>().googleSignIn();
                 },
               ),
             ),

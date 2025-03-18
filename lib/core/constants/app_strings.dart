@@ -1,6 +1,6 @@
 import 'package:to_do_now/features/onboarding/onboarding.dart';
 
-import 'constants.dart';
+import '../core.dart';
 
 class ListStrings {
   static List<OnboardingModel> onboardingStrings = [

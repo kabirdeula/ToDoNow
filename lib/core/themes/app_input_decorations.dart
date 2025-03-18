@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:to_do_now/core/constants/constants.dart';
-
-import 'app_typography.dart';
+import '../core.dart';
 
 /// A utility class for creating custom input decoration themes.
 class AppInputDecorations {

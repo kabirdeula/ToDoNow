@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_now/core/constants/constants.dart';
+
+import '../core.dart';
 
 /// A utility class for managing application-wide text styles.
 ///

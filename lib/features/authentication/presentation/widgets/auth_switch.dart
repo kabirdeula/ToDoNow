@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_now/core/widgets/widgets.dart';
-import 'package:to_do_now/routes/routes.dart';
+
+import '../../../../core/core.dart';
+import '../../../../routes/routes.dart';
 
 class AuthSwitch extends StatelessWidget {
   final String authSwitchText;

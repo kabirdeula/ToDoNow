@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../app/di.dart';
 import '../authentication.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -9,17 +10,12 @@ class AuthCubit extends Cubit<AuthState> {
   final LogoutUsecase _logout;
   final RegisterUsecase _register;
 
-  AuthCubit({
-    GetCurrentUserUsecase? getCurrentUser,
-    GoogleLoginUsecase? googleLogin,
-    LoginUsecase? login,
-    LogoutUsecase? logout,
-    RegisterUsecase? register,
-  })  : _getCurrentUser = getCurrentUser ?? GetCurrentUserUsecase(),
-        _googleLogin = googleLogin ?? GoogleLoginUsecase(),
-        _login = login ?? LoginUsecase(),
-        _logout = logout ?? LogoutUsecase(),
-        _register = register ?? RegisterUsecase(),
+  AuthCubit()
+      : _getCurrentUser = sl(),
+        _googleLogin = sl(),
+        _login = sl(),
+        _logout = sl(),
+        _register = sl(),
         super(AuthState.initial());
 
   Future<void> checkAuthStatus() async {
