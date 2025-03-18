@@ -31,9 +31,12 @@ class AuthCubit extends Cubit<AuthState> {
     emit(const AuthState.loading());
     try {
       final user = await _login(email, password);
-      if (user != null) {
-        emit(AuthState.authenticated(user));
-      }
+      user.fold(
+        (failure) => emit(AuthState.error(failure.message)),
+        (user) {
+          if (user != null) emit(AuthState.authenticated(user));
+        },
+      );
     } catch (e) {
       emit(AuthState.error(e.toString()));
     }
@@ -43,9 +46,12 @@ class AuthCubit extends Cubit<AuthState> {
     emit(const AuthState.loading());
     try {
       final user = await _register(email, password);
-      if (user != null) {
-        emit(AuthState.authenticated(user));
-      }
+      user.fold(
+        (failure) => emit(AuthState.error(failure.message)),
+        (user) {
+          if (user != null) emit(AuthState.authenticated(user));
+        },
+      );
     } catch (e) {
       emit(AuthState.error(e.toString()));
     }
@@ -55,9 +61,12 @@ class AuthCubit extends Cubit<AuthState> {
     emit(const AuthState.loading());
     try {
       final user = await _googleLogin();
-      if (user != null) {
-        emit(AuthState.authenticated(user));
-      }
+      user.fold(
+        (failure) => emit(AuthState.error(failure.message)),
+        (user) {
+          if (user != null) emit(AuthState.authenticated(user));
+        },
+      );
     } catch (e) {
       emit(AuthState.error(e.toString()));
     }

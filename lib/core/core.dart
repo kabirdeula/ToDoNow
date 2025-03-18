@@ -2,6 +2,7 @@ export './constants/app_colors.dart';
 export './constants/app_strings.dart';
 export './constants/asset_paths.dart';
 export './cubit/password_visibility_cubit.dart';
+export './errors/failures.dart';
 export './services/hive_service.dart';
 export './themes/app_input_decorations.dart';
 export './themes/app_themes.dart';

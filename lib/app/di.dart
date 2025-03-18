@@ -3,7 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../features/authentication/authentication.dart';
+import '../core/core.dart';
+import '../features/authentication/authentication.dart';
+import '../features/dashboard/dashboard.dart';
+import '../features/onboarding/onboarding.dart';
+import '../features/task/task.dart';
 
 final sl = GetIt.instance;
 
@@ -15,7 +19,11 @@ void setupDependencyInjection() {
 }
 
 void setupCubitInjection() {
+  sl.registerSingleton<PasswordVisibilityCubit>(PasswordVisibilityCubit());
+  sl.registerSingleton<OnboardingCubit>(OnboardingCubit());
   sl.registerSingleton<AuthCubit>(AuthCubit());
+  sl.registerSingleton<DashboardCubit>(DashboardCubit());
+  sl.registerSingleton<TaskCubit>(TaskCubit());
 }
 
 void setupRepositoryInjection() {

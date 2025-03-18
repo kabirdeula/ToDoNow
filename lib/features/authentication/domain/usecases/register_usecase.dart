@@ -1,4 +1,7 @@
+import 'package:dartz/dartz.dart';
+
 import '../../../../app/di.dart';
+import '../../../../core/core.dart';
 import '../../../user/user.dart';
 import '../../authentication.dart';
 
@@ -7,6 +10,7 @@ class RegisterUsecase {
 
   RegisterUsecase() : _repository = sl();
 
-  Future<UserEntity?> call(String email, String password) async =>
+  Future<Either<AuthFailure, UserEntity?>> call(
+          String email, String password) async =>
       _repository.register(email, password);
 }

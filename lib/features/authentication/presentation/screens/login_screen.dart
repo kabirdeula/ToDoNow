@@ -37,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         state.maybeWhen(
+          loading: () => EasyLoading.show(status: "Logging in..."),
           authenticated: (user) {
             EasyLoading.dismiss();
             context.go(AppRoutes.dashboard.path);
@@ -60,13 +61,9 @@ class _LoginScreenState extends State<LoginScreen> {
           PasswordField(controller: _passwordController),
           const Spacer(),
           AuthButton(
-            formKey: formKey,
-            emailController: _emailController,
-            passwordController: _emailController,
             label: "Login",
             onPressed: () {
               if (formKey.currentState?.saveAndValidate() ?? false) {
-                EasyLoading.show(status: "Logging in...");
                 context
                     .read<AuthCubit>()
                     .login(_emailController.text, _passwordController.text);

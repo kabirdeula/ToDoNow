@@ -40,6 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         state.maybeWhen(
+          loading: () => EasyLoading.show(status: "Registering..."),
           authenticated: (user) {
             EasyLoading.dismiss();
             context.go(AppRoutes.dashboard.path);
@@ -69,14 +70,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
           const Spacer(),
           AuthButton(
             label: 'register',
-            formKey: formKey,
-            emailController: _emailController,
-            passwordController: _passwordController,
             onPressed: () {
               if (formKey.currentState?.saveAndValidate() ?? false) {
                 if (_passwordController.text ==
                     _confirmPasswordController.text) {
-                  EasyLoading.show(status: "Registering...");
                   context.read<AuthCubit>().register(
                       _emailController.text, _passwordController.text);
                 } else {

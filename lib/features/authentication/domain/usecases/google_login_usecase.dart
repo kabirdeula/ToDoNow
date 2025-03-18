@@ -1,4 +1,7 @@
+import 'package:dartz/dartz.dart';
+
 import '../../../../app/di.dart';
+import '../../../../core/core.dart';
 import '../../../user/user.dart';
 import '../../authentication.dart';
 
@@ -7,5 +10,6 @@ class GoogleLoginUsecase {
 
   GoogleLoginUsecase() : _repository = sl();
 
-  Future<UserEntity?> call() async => _repository.googleLogin();
+  Future<Either<AuthFailure, UserEntity?>> call() async =>
+      _repository.googleLogin();
 }

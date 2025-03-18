@@ -15,7 +15,7 @@ import 'routes/routes.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  HiveService.init();
+  await HiveService.init();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
@@ -23,6 +23,7 @@ void main() async {
 
   runApp(MultiBlocProvider(
     providers: [
+      BlocProvider(create: (context) => sl<PasswordVisibilityCubit>()),
       BlocProvider(create: (context) => sl<OnboardingCubit>()),
       BlocProvider(create: (context) => sl<AuthCubit>()),
       BlocProvider(create: (context) => sl<TaskCubit>()),

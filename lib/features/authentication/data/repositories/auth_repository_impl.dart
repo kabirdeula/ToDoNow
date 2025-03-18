@@ -1,4 +1,7 @@
+import 'package:dartz/dartz.dart';
+
 import '../../../../app/di.dart';
+import '../../../../core/core.dart';
 import '../../../user/user.dart';
 import '../../authentication.dart';
 
@@ -17,23 +20,37 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<UserEntity?> googleLogin() async {
-    final userModel = await _remoteService.signInWithGoogle();
-    if (userModel != null) {
-      await _localService.cacheUser(user: userModel);
-      return userModel.toEntity();
+  Future<Either<AuthFailure, UserEntity?>> googleLogin() async {
+    try {
+      final userModel = await _remoteService.signInWithGoogle();
+
+      return userModel.fold((failure) => Left(failure), (userModel) async {
+        if (userModel != null) {
+          await _localService.cacheUser(user: userModel);
+          return Right(userModel.toEntity());
+        }
+        return Left(AuthFailure("User is null"));
+      });
+    } catch (e) {
+      log.e("(Auth Repository) Error logging in with Google: $e");
+      return Left(AuthFailure(e.toString()));
     }
-    return null;
   }
 
   @override
-  Future<UserEntity?> login(String email, String password) async {
+  Future<Either<AuthFailure, UserEntity?>> login(
+    String email,
+    String password,
+  ) async {
     final userModel = await _remoteService.signInWithEmail(email, password);
-    if (userModel != null) {
-      await _localService.cacheUser(user: userModel);
-      return userModel.toEntity();
-    }
-    return null;
+
+    return userModel.fold((failure) => Left(failure), (userModel) async {
+      if (userModel != null) {
+        await _localService.cacheUser(user: userModel);
+        return Right(userModel.toEntity());
+      }
+      return Left(AuthFailure("User not found."));
+    });
   }
 
   @override
@@ -43,12 +60,18 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<UserEntity?> register(String email, String password) async {
+  Future<Either<AuthFailure, UserEntity?>> register(
+    String email,
+    String password,
+  ) async {
     final userModel = await _remoteService.signUpWithEmail(email, password);
-    if (userModel != null) {
-      await _localService.cacheUser(user: userModel);
-      return userModel.toEntity();
-    }
-    return null;
+
+    return userModel.fold((failure) => Left(failure), (userModel) async {
+      if (userModel != null) {
+        await _localService.cacheUser(user: userModel);
+        return Right(userModel.toEntity());
+      }
+      return Left(AuthFailure("User not found."));
+    });
   }
 }
