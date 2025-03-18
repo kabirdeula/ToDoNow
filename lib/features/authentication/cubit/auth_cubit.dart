@@ -1,97 +1,74 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:to_do_now/core/di/di.dart';
-import 'package:to_do_now/core/utils/utils.dart';
-import 'package:to_do_now/features/authentication/authentication.dart';
 
-part 'auth_state.dart';
+import '../authentication.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  final AuthRepository _repository = sl<AuthRepository>();
+  final GetCurrentUserUsecase _getCurrentUser;
+  final GoogleLoginUsecase _googleLogin;
+  final LoginUsecase _login;
+  final LogoutUsecase _logout;
+  final RegisterUsecase _register;
 
-  AuthCubit() : super(AuthState.initial());
+  AuthCubit({
+    GetCurrentUserUsecase? getCurrentUser,
+    GoogleLoginUsecase? googleLogin,
+    LoginUsecase? login,
+    LogoutUsecase? logout,
+    RegisterUsecase? register,
+  })  : _getCurrentUser = getCurrentUser ?? GetCurrentUserUsecase(),
+        _googleLogin = googleLogin ?? GoogleLoginUsecase(),
+        _login = login ?? LoginUsecase(),
+        _logout = logout ?? LogoutUsecase(),
+        _register = register ?? RegisterUsecase(),
+        super(AuthState.initial());
 
-  void checkUserStatus() async {}
-
-  void toggleObscureText() {
-    emit(state.copyWith(isObscureText: !state.isObscureText));
-    log.i("(Auth Cubit) isObscureText: ${state.isObscureText}");
-  }
-
-  void login({required UserModel user}) async {
-    emit(state.copyWith(isLoading: true));
-    try {
-      final result = await sl<LoginUsecase>().call(user: user);
-      if (result.error != null) {
-        emit(state.copyWith(
-          isLoading: false,
-          isLoggedIn: false,
-          error: result.error,
-        ));
-        log.e("(Auth Cubit) Login Error: ${result.error}");
-      } else {
-        emit(state.copyWith(isLoading: false, isLoggedIn: true));
-        log.i("(Auth Cubit) User Logged in successfully.");
-      }
-    } catch (e) {
-      emit(state.copyWith(
-        isLoading: false,
-        isLoggedIn: false,
-        error: e.toString(),
-      ));
-      log.e("(Auth Cubit) Failed to Login: ${e.toString()}");
+  Future<void> checkAuthStatus() async {
+    final user = await _getCurrentUser();
+    if (user != null) {
+      emit(AuthState.authenticated(user));
+    } else {
+      emit(AuthState.unauthenticated());
     }
   }
 
-  Future<void> googleLogin() async {
-    emit(state.copyWith(isLoading: true));
+  Future<void> login(String email, String password) async {
+    emit(const AuthState.loading());
     try {
-      final user = await sl<GoogleLoginUsecase>().call();
+      final user = await _login(email, password);
       if (user != null) {
-        emit(state.copyWith(isLoading: false, isLoggedIn: true));
-        log.i("(Auth Cubit) User Logged in successfully.");
-      } else {
-        emit(state.copyWith(isLoading: false, isLoggedIn: false));
+        emit(AuthState.authenticated(user));
       }
     } catch (e) {
-      emit(state.copyWith(
-        isLoading: false,
-        isLoggedIn: false,
-        error: e.toString(),
-      ));
-      log.e("(Auth Cubit) Failed to Login: ${e.toString()}");
+      emit(AuthState.error(e.toString()));
     }
   }
 
-  void register({required UserModel user}) async {
-    emit(state.copyWith(isLoading: true));
+  Future<void> register(String email, String password) async {
+    emit(const AuthState.loading());
     try {
-      final result = await sl<RegisterUsecase>().call(user: user);
-      if (result.error != null) {
-        emit(state.copyWith(
-          isLoading: true,
-          isLoggedIn: false,
-          error: result.error,
-        ));
-        log.e("(Auth Cubit) Register Error: ${result.error}");
-      } else {
-        emit(state.copyWith(isLoading: false, isLoggedIn: true));
-        log.i("(Auth Cubit) User registered successfully.");
+      final user = await _register(email, password);
+      if (user != null) {
+        emit(AuthState.authenticated(user));
       }
     } catch (e) {
-      emit(state.copyWith(
-        isLoading: false,
-        isLoggedIn: false,
-        error: e.toString(),
-      ));
-      log.e("(Auth Cubit) Failed to register: ${e.toString()}");
+      emit(AuthState.error(e.toString()));
     }
   }
 
-  void resetState() => emit(AuthState.initial());
+  Future<void> googleSignIn() async {
+    emit(const AuthState.loading());
+    try {
+      final user = await _googleLogin();
+      if (user != null) {
+        emit(AuthState.authenticated(user));
+      }
+    } catch (e) {
+      emit(AuthState.error(e.toString()));
+    }
+  }
 
   Future<void> logout() async {
-    await _repository.logout();
-    emit(AuthState.initial());
+    await _logout();
+    emit(AuthState.unauthenticated());
   }
 }

@@ -1,3 +1,4 @@
+import '../../../user/user.dart';
 import '../../authentication.dart';
 
 class GoogleLoginUsecase {
@@ -6,5 +7,5 @@ class GoogleLoginUsecase {
   GoogleLoginUsecase({AuthRepository? repository})
       : _repository = repository ?? AuthRepositoryImpl();
 
-  Future<void> call() async => _repository.googleLogin();
+  Future<UserEntity?> call() async => _repository.googleLogin();
 }

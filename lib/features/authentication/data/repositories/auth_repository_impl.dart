@@ -1,5 +1,4 @@
-import 'package:to_do_now/features/user/domain/entities/user_entity.dart';
-
+import '../../../user/user.dart';
 import '../../authentication.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -19,8 +18,13 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> googleLogin() async {
-    await _remoteService.signInWithGoogle();
+  Future<UserEntity?> googleLogin() async {
+    final userModel = await _remoteService.signInWithGoogle();
+    if (userModel != null) {
+      await _localService.cacheUser(user: userModel);
+      return userModel.toEntity();
+    }
+    return null;
   }
 
   @override
