@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-// import 'package:to_do_now/core/di/di.dart';
 
-import 'package:to_do_now/core/widgets/widgets.dart';
-import 'package:to_do_now/features/onboarding/onboarding.dart';
-// import 'package:to_do_now/features/settings/settings.dart';
-import 'package:to_do_now/routes/routes.dart';
+import '../../../../core/core.dart';
+import '../../../../routes/routes.dart';
+import '../../onboarding.dart';
 
 class OnboardingNavigation extends StatelessWidget {
   final OnboardingCubit cubit;

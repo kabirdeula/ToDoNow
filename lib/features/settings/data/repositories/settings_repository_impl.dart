@@ -1,4 +1,4 @@
-import '../../../../core/utils/utils.dart';
+import '../../../../core/core.dart';
 import '../../settings.dart';
 
 class SettingsRepositoryImpl implements SettingsRepository {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_now/core/constants/constants.dart';
-import 'package:to_do_now/core/themes/themes.dart';
+
+import '../../../../core/core.dart';
 
 class EmptyHomeScreen extends StatelessWidget {
   const EmptyHomeScreen({super.key});

@@ -1,7 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../../../../core/constants/constants.dart';
-import '../../../../../core/utils/utils.dart';
+import '../../../../../core/core.dart';
 import '../../../task.dart';
 
 class TaskLocalService {

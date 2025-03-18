@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:to_do_now/core/widgets/widgets.dart';
-import 'package:to_do_now/features/dashboard/dashboard.dart';
 
+import '../../../../core/core.dart';
 import '../../../profile/profile.dart';
+import '../../dashboard.dart';
 
 class DashboardScreen extends StatelessWidget with DashboardMixin {
   DashboardScreen({super.key});

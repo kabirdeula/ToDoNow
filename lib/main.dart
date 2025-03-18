@@ -2,26 +2,20 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
-import 'core/di/di.dart';
-import 'core/themes/themes.dart';
+import 'app/di.dart';
+import 'core/core.dart';
 import 'features/authentication/authentication.dart';
 import 'features/dashboard/dashboard.dart';
 import 'features/onboarding/onboarding.dart';
-// import 'features/settings/settings.dart';
 import 'features/task/task.dart';
-import 'features/user/user.dart';
 import 'firebase_options.dart';
 import 'routes/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Hive.initFlutter();
-  // Hive.registerAdapter(SettingsModelAdapter());
-  Hive.registerAdapter(TaskModelAdapter());
-  Hive.registerAdapter(UserModelAdapter());
+  HiveService.init();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 

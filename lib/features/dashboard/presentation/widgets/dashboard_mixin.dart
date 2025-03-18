@@ -6,12 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:uuid/uuid.dart';
 
-import 'package:to_do_now/core/constants/constants.dart';
-import 'package:to_do_now/core/themes/themes.dart';
-import 'package:to_do_now/core/utils/utils.dart';
-import 'package:to_do_now/core/widgets/widgets.dart';
 import 'package:to_do_now/features/task/task.dart';
 import 'package:to_do_now/routes/routes.dart';
+
+import '../../../../core/core.dart';
 
 mixin DashboardMixin {
   final formKey = GlobalKey<FormBuilderState>();

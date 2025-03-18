@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/themes/themes.dart';
+import '../../../../core/core.dart';
 import '../../../../routes/routes.dart';
 import '../../../authentication/authentication.dart';
 import '../../profile.dart';
@@ -13,7 +13,10 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state.isLoggedIn == false) context.go(AppRoutes.login.path);
+        state.maybeWhen(
+          unauthenticated: () => context.go(AppRoutes.login.path),
+          orElse: () {},
+        );
       },
       child: Scaffold(
         body: CustomScrollView(

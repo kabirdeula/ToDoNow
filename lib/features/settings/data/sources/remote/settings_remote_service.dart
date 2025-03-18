@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../../../core/utils/utils.dart';
+import '../../../../../core/core.dart';
 import '../../../settings.dart';
 
 class SettingsRemoteService {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/themes/themes.dart';
+import '../../../../core/core.dart';
 
 class TaskCard extends StatelessWidget {
   final String label;
