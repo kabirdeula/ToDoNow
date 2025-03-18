@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import 'package:to_do_now/features/authentication/authentication.dart';
-import 'package:to_do_now/routes/routes.dart';
+import '../../../../routes/routes.dart';
+import '../../authentication.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,7 +16,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
-  final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
+  final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
 
   @override
   void initState() {
@@ -32,59 +32,50 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _onLoginPressed(BuildContext context) {
-    if (_formKey.currentState?.saveAndValidate() ?? false) {
-      EasyLoading.show(status: "Logging in...");
-      final user = UserModel(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      context.read<AuthCubit>().login(user: user);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state.error != null) {
-          EasyLoading.dismiss();
-          EasyLoading.showError(state.error!);
-          context.read<AuthCubit>().resetState();
-        }
-        if (state.isLoggedIn) {
-          Future.delayed(const Duration(seconds: 3), () {
-            if (!context.mounted) return;
-            context.go(AppRoutes.dashboard.path);
+        state.maybeWhen(
+          authenticated: (user) {
             EasyLoading.dismiss();
-          });
-        }
+            context.go(AppRoutes.dashboard.path);
+          },
+          error: (error) {
+            EasyLoading.dismiss();
+            EasyLoading.showError(error);
+          },
+          orElse: () {},
+        );
       },
       child: AuthScreen(
-        title: 'Login',
-        authenticationFields: _buildLoginForm(context),
+        title: "Login",
         authSwitchText: "Don't have an account?",
-        authSwitchAction: 'register',
+        authSwitchAction: "register",
         location: AppRoutes.register.path,
-        formKey: _formKey,
+        formKey: formKey,
+        authenticationFields: [
+          EmailField(controller: _emailController),
+          const SizedBox(height: 16.0),
+          PasswordField(controller: _passwordController),
+          const Spacer(),
+          AuthButton(
+            formKey: formKey,
+            emailController: _emailController,
+            passwordController: _emailController,
+            label: "Login",
+            onPressed: () {
+              if (formKey.currentState?.saveAndValidate() ?? false) {
+                EasyLoading.show(status: "Logging in...");
+                context
+                    .read<AuthCubit>()
+                    .login(_emailController.text, _passwordController.text);
+              }
+            },
+          ),
+          const SizedBox(height: 16.0)
+        ],
       ),
     );
-  }
-
-  List<Widget> _buildLoginForm(BuildContext context) {
-    return [
-      EmailField(controller: _emailController),
-      const SizedBox(height: 16.0),
-      PasswordField(controller: _passwordController),
-      const Spacer(),
-      AuthButton(
-        label: 'login',
-        formKey: _formKey,
-        emailController: _emailController,
-        passwordController: _passwordController,
-        onPressed: () => _onLoginPressed(context),
-      ),
-      const SizedBox(height: 16.0),
-    ];
   }
 }

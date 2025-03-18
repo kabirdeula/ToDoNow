@@ -15,29 +15,29 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
-  late final TextEditingController emailController;
-  late final TextEditingController passwordController;
-  late final TextEditingController confirmPasswordController;
+  late final TextEditingController _emailController;
+  late final TextEditingController _passwordController;
+  late final TextEditingController _confirmPasswordController;
 
   @override
   void initState() {
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-    confirmPasswordController = TextEditingController();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _confirmPasswordController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
     super.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    confirmPasswordController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
+    return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         state.maybeWhen(
           authenticated: (user) {
@@ -51,45 +51,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
           orElse: () {},
         );
       },
-      builder: (context, state) {
-        return AuthScreen(
-          title: 'Register',
-          authSwitchText: "Already have an account?",
-          authSwitchAction: "Login",
-          location: AppRoutes.login.path,
-          formKey: formKey,
-          authenticationFields: [
-            EmailField(controller: emailController),
-            const SizedBox(height: 16.0),
-            PasswordField(controller: passwordController),
-            const SizedBox(height: 16.0),
-            PasswordField(
-              controller: confirmPasswordController,
-              title: 'Confirm Password',
-            ),
-            const Spacer(),
-            AuthButton(
-              label: 'register',
-              formKey: formKey,
-              emailController: emailController,
-              passwordController: passwordController,
-              onPressed: () {
-                if (formKey.currentState?.saveAndValidate() ?? false) {
-                  if (passwordController.text ==
-                      confirmPasswordController.text) {
-                    EasyLoading.show(status: "Registering...");
-                    context.read<AuthCubit>().register(
-                        emailController.text, passwordController.text);
-                  } else {
-                    EasyLoading.showError("Passwords do not match");
-                  }
+      child: AuthScreen(
+        title: 'Register',
+        authSwitchText: "Already have an account?",
+        authSwitchAction: "Login",
+        location: AppRoutes.login.path,
+        formKey: formKey,
+        authenticationFields: [
+          EmailField(controller: _emailController),
+          const SizedBox(height: 16.0),
+          PasswordField(controller: _passwordController),
+          const SizedBox(height: 16.0),
+          PasswordField(
+            controller: _confirmPasswordController,
+            title: 'Confirm Password',
+          ),
+          const Spacer(),
+          AuthButton(
+            label: 'register',
+            formKey: formKey,
+            emailController: _emailController,
+            passwordController: _passwordController,
+            onPressed: () {
+              if (formKey.currentState?.saveAndValidate() ?? false) {
+                if (_passwordController.text ==
+                    _confirmPasswordController.text) {
+                  EasyLoading.show(status: "Registering...");
+                  context.read<AuthCubit>().register(
+                      _emailController.text, _passwordController.text);
+                } else {
+                  EasyLoading.showError("Passwords do not match");
                 }
-              },
-            ),
-            const SizedBox(height: 32.0),
-          ],
-        );
-      },
+              }
+            },
+          ),
+          const SizedBox(height: 32.0),
+        ],
+      ),
     );
   }
 }
