@@ -14,10 +14,10 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-          // leading: Icon(Icons.menu),
-          // title: Text('Hello'),
-          // actions: [],
-          ),
+        // leading: Icon(Icons.menu),
+        title: Text('Index'),
+        // actions: [],
+      ),
       body: BlocBuilder<TaskCubit, TaskState>(
         builder: (context, state) {
           return state.maybeWhen(
