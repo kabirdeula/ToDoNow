@@ -100,6 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 value: isSelected,
                 id: task.id,
                 task: taskModel,
+                time: task.createdAt,
               ),
             ),
           );
