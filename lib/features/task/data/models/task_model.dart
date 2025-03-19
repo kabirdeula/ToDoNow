@@ -37,13 +37,14 @@ class TaskModel with _$TaskModel {
       categoryId: entity.categoryId,
       priority: entity.priority,
       isCompleted: entity.isCompleted,
-      subTasks: entity.subtasks!
-          .map((e) => SubTaskModel(
-                id: e.id,
-                title: e.title,
-                isCompleted: e.isCompleted,
-              ))
-          .toList(),
+      subTasks: entity.subtasks
+              ?.map((e) => SubTaskModel(
+                    id: e.id,
+                    title: e.title,
+                    isCompleted: e.isCompleted,
+                  ))
+              .toList() ??
+          [],
     );
   }
 

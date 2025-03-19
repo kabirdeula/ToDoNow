@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../task/task.dart';
 import '/core/core.dart';
 import '../../../home/home.dart';
 import '../../../profile/profile.dart';
@@ -29,7 +30,7 @@ class DashboardScreen extends StatelessWidget with DashboardMixin {
         );
       }),
       floatingActionButton: CustomFloatingActionButton(
-        onPressed: () => createTask(context),
+        onPressed: () => addTask(context),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BlocBuilder<DashboardCubit, DashboardState>(
