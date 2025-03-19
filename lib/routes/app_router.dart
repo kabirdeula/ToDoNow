@@ -1,12 +1,9 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:to_do_now/core/di/di.dart';
-import 'package:to_do_now/features/authentication/authentication.dart';
-import 'package:to_do_now/features/dashboard/dashboard.dart';
-import 'package:to_do_now/features/onboarding/onboarding.dart';
-// import 'package:to_do_now/features/settings/settings.dart';
-import 'package:to_do_now/features/start/start.dart';
-import 'package:to_do_now/features/task/task.dart';
-
+import '../features/authentication/authentication.dart';
+import '../features/dashboard/dashboard.dart';
+import '../features/home/home.dart';
+import '../features/onboarding/onboarding.dart';
+import '../features/start/start.dart';
+import '../features/task/task.dart';
 import 'routes.dart';
 
 class AppRouter {
