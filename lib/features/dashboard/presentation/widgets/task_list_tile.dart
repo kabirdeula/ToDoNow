@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:to_do_now/core/utils/utils.dart';
-import 'package:to_do_now/features/task/task.dart';
+
+import '../../../../core/core.dart';
+import '../../../task/task.dart';
 
 class TaskListTile extends StatelessWidget {
   final String title;
@@ -55,7 +56,7 @@ class TaskListTile extends StatelessWidget {
                         context.read<TaskCubit>().toggleSelection(id);
                         break;
                       case 'delete':
-                        context.read<TaskCubit>().deleteTask(task);
+                        // context.read<TaskCubit>().deleteTask(task);
                         break;
                     }
                   },

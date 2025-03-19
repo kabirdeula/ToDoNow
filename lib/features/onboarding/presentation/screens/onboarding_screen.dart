@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:to_do_now/core/constants/constants.dart';
-import 'package:to_do_now/core/di/di.dart';
-import 'package:to_do_now/core/widgets/widgets.dart';
-import 'package:to_do_now/features/onboarding/onboarding.dart';
-import 'package:to_do_now/features/settings/settings.dart';
-import 'package:to_do_now/routes/routes.dart';
+import '../../../../core/core.dart';
+import '../../../../routes/routes.dart';
+import '../../onboarding.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -37,7 +34,7 @@ class OnboardingScreen extends StatelessWidget {
                 child: CustomTextButton(
                   label: 'skip',
                   onPressed: () async {
-                    await sl<SettingsService>().setFirstTimeUser();
+                    // await sl<SettingsService>().setFirstTimeUser();
                     if (!context.mounted) return;
                     context.go(AppRoutes.start.path);
                   },

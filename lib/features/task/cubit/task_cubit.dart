@@ -1,81 +1,100 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:to_do_now/core/di/di.dart';
-import 'package:to_do_now/core/utils/utils.dart';
-import 'package:to_do_now/features/task/task.dart';
 
-part 'task_state.dart';
+import '../../../app/di.dart';
+import '../task.dart';
 
 class TaskCubit extends Cubit<TaskState> {
-  final TaskUsecase _usecase = sl<TaskUsecase>();
+  final AddTaskUsecase _addTask;
+  final DeleteAllTasksUsecase _deleteAllTask;
+  final DeleteSelectedTasksUsecase _deleteSelectedTask;
+  final DeleteTaskUsecase _deleteTask;
+  final GetTaskUsecase _getTask;
+  final SaveTaskUsecase _saveTask;
 
-  TaskCubit() : super(TaskState.initial()) {
+  final Set<String> _selectedTasks = {};
+
+  TaskCubit()
+      : _addTask = sl(),
+        _deleteAllTask = sl(),
+        _deleteSelectedTask = sl(),
+        _deleteTask = sl(),
+        _getTask = sl(),
+        _saveTask = sl(),
+        super(TaskState.initial()) {
     loadTasks();
   }
 
-  void addTask(TaskModel task) async {
-    await _usecase.addTask(task: task);
-    final updatedTasks = await _usecase.getTasks();
-    emit(state.copyWith(tasks: updatedTasks));
-    log.i("(Task Cubit) Task added successfully.\n$task");
+  Future<void> loadTasks() async {
+    emit(TaskState.loading());
+    try {
+      final tasks = await _getTask.call();
+      emit(TaskState.loaded(tasks: tasks));
+    } catch (e) {
+      emit(TaskState.error(e.toString()));
+    }
   }
 
-  void loadTasks() async {
-    emit(state.copyWith(isLoading: true));
+  Future<void> addTask(TaskEntity task) async {
+    await _addTask.call(task);
+    loadTasks();
+  }
+
+  Future<void> saveTask(TaskEntity task) async {
     try {
-      final tasks = await _usecase.getTasks();
-      emit(state.copyWith(isLoading: false, tasks: tasks));
-      log.i("(Task Cubit) Tasks loaded successfully.");
+      await _saveTask.call(task);
+      loadTasks();
     } catch (e) {
-      emit(state.copyWith(isLoading: false));
-      log.e("(Task Cubit) Error getting tasks: $e");
+      emit(TaskState.error(e.toString()));
+    }
+  }
+
+  Future<void> deleteTask(String id) async {
+    await _deleteTask(id);
+    loadTasks();
+  }
+
+  Future<void> deleteAllTasks() async {
+    try {
+      await _deleteAllTask.call();
+      emit(TaskState.loaded(tasks: []));
+    } catch (e) {
+      emit(TaskState.error(e.toString()));
     }
   }
 
   void toggleSelection(String taskId) {
-    final newSelectedTasks = Set<String>.from(state.selectedTasks);
-    if (newSelectedTasks.contains(taskId)) {
-      newSelectedTasks.remove(taskId);
+    if (_selectedTasks.contains(taskId)) {
+      _selectedTasks.remove(taskId);
     } else {
-      newSelectedTasks.add(taskId);
+      _selectedTasks.add(taskId);
     }
-
-    emit(state.copyWith(
-      selectedTasks: newSelectedTasks,
-      isSelectionMode: newSelectedTasks.isNotEmpty,
-    ));
+    emit(_currentLoadedState());
   }
 
   void clearSelection() {
-    emit(state.copyWith(selectedTasks: {}, isSelectionMode: false));
+    _selectedTasks.clear();
+    emit(_currentLoadedState());
   }
 
   void deleteSelectedTasks() async {
-    if (state.selectedTasks.isEmpty) return;
+    if (_selectedTasks.isEmpty) return;
 
     try {
-      await _usecase.deleteSelectedTasks(state.selectedTasks);
-      final updatedTasks = await _usecase.getTasks();
-
-      emit(state.copyWith(
-        tasks: updatedTasks,
-        selectedTasks: {},
-        isSelectionMode: false,
-      ));
-
-      log.i("(Task Cubit) Selected tasks deleted successfully.");
+      await _deleteSelectedTask.call(_selectedTasks);
+      _selectedTasks.clear();
+      emit(_currentLoadedState());
     } catch (e) {
-      log.e("(Task Cubit) Error deleting selected tasks: $e");
+      emit(TaskState.error(e.toString()));
     }
   }
 
-  void deleteTask(TaskModel task) async {
-    try {
-      await _usecase.deleteTask(task: task);
-      loadTasks();
-      log.i("(Task Cubit) Selected task deleted successfully.");
-    } catch (e) {
-      log.e("(Task Cubit) Error deleting selected task: $e");
-    }
+  TaskState _currentLoadedState() {
+    return state.maybeWhen(
+      loaded: (tasks, isSelectionMode) => TaskState.loaded(
+        tasks: tasks,
+        isSelectionMode: _selectedTasks.isNotEmpty,
+      ),
+      orElse: () => state,
+    );
   }
 }

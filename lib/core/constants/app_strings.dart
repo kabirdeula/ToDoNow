@@ -1,6 +1,6 @@
 import 'package:to_do_now/features/onboarding/onboarding.dart';
 
-import 'constants.dart';
+import '../core.dart';
 
 class ListStrings {
   static List<OnboardingModel> onboardingStrings = [
@@ -22,4 +22,12 @@ class ListStrings {
           "You can organize your daily tasks by adding your tasks into separate categories",
     ),
   ];
+}
+
+class HiveConstants {
+  static const String userBox = 'userBox';
+  static const String taskBox = 'taskBox';
+  static const String categoryBox = 'categoryBox';
+  static const String focusSessionBox = 'focusSessionBox';
+  static const String settingsBox = 'settingsBox';
 }

@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:to_do_now/core/themes/app_typography.dart';
-import 'package:to_do_now/core/widgets/widgets.dart';
-import 'package:to_do_now/features/authentication/authentication.dart';
+
+import '../../../../core/core.dart';
+import '../../authentication.dart';
 
 class AuthScreen extends StatelessWidget {
   final String title;
-  final List<Widget> authenticationFields;
   final String authSwitchText;
   final String authSwitchAction;
   final String location;
   final GlobalKey<FormBuilderState> formKey;
+  final List<Widget> authenticationFields;
 
   const AuthScreen({
     super.key,
     required this.title,
-    required this.authenticationFields,
     required this.authSwitchText,
     required this.authSwitchAction,
     required this.location,
     required this.formKey,
+    required this.authenticationFields,
   });
 
   @override
