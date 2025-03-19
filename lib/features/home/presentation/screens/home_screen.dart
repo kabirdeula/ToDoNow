@@ -6,28 +6,63 @@ import '../../../dashboard/dashboard.dart';
 import '../../../task/task.dart';
 import '../../home.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late final TextEditingController _searchController;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController();
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _onSearchChanged() {
+    final query = _searchController.text;
+    context.read<TaskCubit>().searchTasks(query);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        // leading: Icon(Icons.menu),
-        title: Text('Index'),
-        // actions: [],
-      ),
-      body: BlocBuilder<TaskCubit, TaskState>(
-        builder: (context, state) {
-          return state.maybeWhen(
-            initial: () => EmptyHomeScreen(),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            loaded: (tasks, isSelectionMode) =>
-                _displayTaskList(context, tasks, isSelectionMode),
-            orElse: () => EmptyHomeScreen(),
-          );
-        },
+      body: RefreshIndicator(
+        onRefresh: () => context.read<TaskCubit>().loadTasks(),
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(title: Text('Index')),
+            SliverPersistentHeader(
+              delegate: HomeSearchBar(controller: _searchController),
+            ),
+            BlocBuilder<TaskCubit, TaskState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                    loaded: (tasks, isSelectionMode) {
+                      return _displayTaskList(
+                        context,
+                        tasks,
+                        isSelectionMode,
+                      );
+                    },
+                    orElse: () =>
+                        const SliverFillRemaining(child: EmptyHomeScreen()));
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -38,20 +73,18 @@ class HomeScreen extends StatelessWidget {
     bool isSelectionMode,
   ) {
     if (tasks.isEmpty) {
-      return EmptyHomeScreen();
+      return const SliverFillRemaining(child: EmptyHomeScreen());
     }
-    return RefreshIndicator(
-      onRefresh: () => context.read<TaskCubit>().loadTasks(),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: ListView.builder(
-          itemCount: tasks.length,
-          itemBuilder: (context, index) {
-            final task = tasks[index];
-            final taskModel = TaskModel.fromEntity(task);
-            final isSelected = isSelectionMode;
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          final task = tasks[index];
+          final taskModel = TaskModel.fromEntity(task);
+          final isSelected = isSelectionMode;
 
-            return GestureDetector(
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: GestureDetector(
               onLongPress: () =>
                   context.read<TaskCubit>().toggleSelection(task.id),
               onTap: () {
@@ -68,9 +101,10 @@ class HomeScreen extends StatelessWidget {
                 id: task.id,
                 task: taskModel,
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
+        childCount: tasks.length,
       ),
     );
   }

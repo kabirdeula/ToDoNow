@@ -97,4 +97,20 @@ class TaskCubit extends Cubit<TaskState> {
       orElse: () => state,
     );
   }
+
+  Future<void> searchTasks(String query) async {
+    if (query.isEmpty) {
+      await loadTasks();
+    } else {
+      state.maybeWhen(
+        loaded: (tasks, isSelectionMode) async {
+          final filteredTasks = tasks.where((task) {
+            return task.title.toLowerCase().contains(query.toLowerCase());
+          }).toList();
+          emit(TaskState.loaded(tasks: filteredTasks));
+        },
+        orElse: () async => emit(TaskState.initial()),
+      );
+    }
+  }
 }
