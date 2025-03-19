@@ -20,12 +20,12 @@ mixin _$TaskEntity {
   String get title => throw _privateConstructorUsedError;
   String? get subtitle => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get dueDate => throw _privateConstructorUsedError;
+  DateTime? get dueDate => throw _privateConstructorUsedError;
   DateTime? get completedAt => throw _privateConstructorUsedError;
-  String get categoryId => throw _privateConstructorUsedError;
-  int get priority => throw _privateConstructorUsedError;
-  bool get isCompleted => throw _privateConstructorUsedError;
-  List<SubTaskEntity> get subtasks => throw _privateConstructorUsedError;
+  String? get categoryId => throw _privateConstructorUsedError;
+  int? get priority => throw _privateConstructorUsedError;
+  bool? get isCompleted => throw _privateConstructorUsedError;
+  List<SubTaskEntity>? get subtasks => throw _privateConstructorUsedError;
 
   /// Create a copy of TaskEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -45,12 +45,12 @@ abstract class $TaskEntityCopyWith<$Res> {
       String title,
       String? subtitle,
       DateTime createdAt,
-      DateTime dueDate,
+      DateTime? dueDate,
       DateTime? completedAt,
-      String categoryId,
-      int priority,
-      bool isCompleted,
-      List<SubTaskEntity> subtasks});
+      String? categoryId,
+      int? priority,
+      bool? isCompleted,
+      List<SubTaskEntity>? subtasks});
 }
 
 /// @nodoc
@@ -72,12 +72,12 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
     Object? title = null,
     Object? subtitle = freezed,
     Object? createdAt = null,
-    Object? dueDate = null,
+    Object? dueDate = freezed,
     Object? completedAt = freezed,
-    Object? categoryId = null,
-    Object? priority = null,
-    Object? isCompleted = null,
-    Object? subtasks = null,
+    Object? categoryId = freezed,
+    Object? priority = freezed,
+    Object? isCompleted = freezed,
+    Object? subtasks = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -96,30 +96,30 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      dueDate: null == dueDate
+      dueDate: freezed == dueDate
           ? _value.dueDate
           : dueDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       completedAt: freezed == completedAt
           ? _value.completedAt
           : completedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      categoryId: null == categoryId
+      categoryId: freezed == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
-              as String,
-      priority: null == priority
+              as String?,
+      priority: freezed == priority
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
-              as int,
-      isCompleted: null == isCompleted
+              as int?,
+      isCompleted: freezed == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
-              as bool,
-      subtasks: null == subtasks
+              as bool?,
+      subtasks: freezed == subtasks
           ? _value.subtasks
           : subtasks // ignore: cast_nullable_to_non_nullable
-              as List<SubTaskEntity>,
+              as List<SubTaskEntity>?,
     ) as $Val);
   }
 }
@@ -137,12 +137,12 @@ abstract class _$$TaskEntityImplCopyWith<$Res>
       String title,
       String? subtitle,
       DateTime createdAt,
-      DateTime dueDate,
+      DateTime? dueDate,
       DateTime? completedAt,
-      String categoryId,
-      int priority,
-      bool isCompleted,
-      List<SubTaskEntity> subtasks});
+      String? categoryId,
+      int? priority,
+      bool? isCompleted,
+      List<SubTaskEntity>? subtasks});
 }
 
 /// @nodoc
@@ -162,12 +162,12 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
     Object? title = null,
     Object? subtitle = freezed,
     Object? createdAt = null,
-    Object? dueDate = null,
+    Object? dueDate = freezed,
     Object? completedAt = freezed,
-    Object? categoryId = null,
-    Object? priority = null,
-    Object? isCompleted = null,
-    Object? subtasks = null,
+    Object? categoryId = freezed,
+    Object? priority = freezed,
+    Object? isCompleted = freezed,
+    Object? subtasks = freezed,
   }) {
     return _then(_$TaskEntityImpl(
       id: null == id
@@ -186,30 +186,30 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      dueDate: null == dueDate
+      dueDate: freezed == dueDate
           ? _value.dueDate
           : dueDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       completedAt: freezed == completedAt
           ? _value.completedAt
           : completedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      categoryId: null == categoryId
+      categoryId: freezed == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
-              as String,
-      priority: null == priority
+              as String?,
+      priority: freezed == priority
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
-              as int,
-      isCompleted: null == isCompleted
+              as int?,
+      isCompleted: freezed == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
-              as bool,
-      subtasks: null == subtasks
+              as bool?,
+      subtasks: freezed == subtasks
           ? _value._subtasks
           : subtasks // ignore: cast_nullable_to_non_nullable
-              as List<SubTaskEntity>,
+              as List<SubTaskEntity>?,
     ));
   }
 }
@@ -222,12 +222,12 @@ class _$TaskEntityImpl implements _TaskEntity {
       required this.title,
       this.subtitle,
       required this.createdAt,
-      required this.dueDate,
+      this.dueDate,
       this.completedAt,
-      required this.categoryId,
-      required this.priority,
-      required this.isCompleted,
-      required final List<SubTaskEntity> subtasks})
+      this.categoryId,
+      this.priority,
+      this.isCompleted,
+      final List<SubTaskEntity>? subtasks})
       : _subtasks = subtasks;
 
   @override
@@ -239,21 +239,23 @@ class _$TaskEntityImpl implements _TaskEntity {
   @override
   final DateTime createdAt;
   @override
-  final DateTime dueDate;
+  final DateTime? dueDate;
   @override
   final DateTime? completedAt;
   @override
-  final String categoryId;
+  final String? categoryId;
   @override
-  final int priority;
+  final int? priority;
   @override
-  final bool isCompleted;
-  final List<SubTaskEntity> _subtasks;
+  final bool? isCompleted;
+  final List<SubTaskEntity>? _subtasks;
   @override
-  List<SubTaskEntity> get subtasks {
+  List<SubTaskEntity>? get subtasks {
+    final value = _subtasks;
+    if (value == null) return null;
     if (_subtasks is EqualUnmodifiableListView) return _subtasks;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_subtasks);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -313,12 +315,12 @@ abstract class _TaskEntity implements TaskEntity {
       required final String title,
       final String? subtitle,
       required final DateTime createdAt,
-      required final DateTime dueDate,
+      final DateTime? dueDate,
       final DateTime? completedAt,
-      required final String categoryId,
-      required final int priority,
-      required final bool isCompleted,
-      required final List<SubTaskEntity> subtasks}) = _$TaskEntityImpl;
+      final String? categoryId,
+      final int? priority,
+      final bool? isCompleted,
+      final List<SubTaskEntity>? subtasks}) = _$TaskEntityImpl;
 
   @override
   String get id;
@@ -329,17 +331,17 @@ abstract class _TaskEntity implements TaskEntity {
   @override
   DateTime get createdAt;
   @override
-  DateTime get dueDate;
+  DateTime? get dueDate;
   @override
   DateTime? get completedAt;
   @override
-  String get categoryId;
+  String? get categoryId;
   @override
-  int get priority;
+  int? get priority;
   @override
-  bool get isCompleted;
+  bool? get isCompleted;
   @override
-  List<SubTaskEntity> get subtasks;
+  List<SubTaskEntity>? get subtasks;
 
   /// Create a copy of TaskEntity
   /// with the given fields replaced by the non-null parameter values.

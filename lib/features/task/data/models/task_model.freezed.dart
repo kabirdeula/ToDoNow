@@ -29,17 +29,17 @@ mixin _$TaskModel {
   @HiveField(3)
   DateTime get createdAt => throw _privateConstructorUsedError;
   @HiveField(4)
-  DateTime get dueDate => throw _privateConstructorUsedError;
+  DateTime? get dueDate => throw _privateConstructorUsedError;
   @HiveField(5)
   DateTime? get completedAt => throw _privateConstructorUsedError;
   @HiveField(6)
-  String get categoryId => throw _privateConstructorUsedError;
+  String? get categoryId => throw _privateConstructorUsedError;
   @HiveField(7)
-  int get priority => throw _privateConstructorUsedError;
+  int? get priority => throw _privateConstructorUsedError;
   @HiveField(8)
-  bool get isCompleted => throw _privateConstructorUsedError;
+  bool? get isCompleted => throw _privateConstructorUsedError;
   @HiveField(9)
-  List<SubTaskModel> get subTasks => throw _privateConstructorUsedError;
+  List<SubTaskModel>? get subTasks => throw _privateConstructorUsedError;
 
   /// Serializes this TaskModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -61,12 +61,12 @@ abstract class $TaskModelCopyWith<$Res> {
       @HiveField(1) String title,
       @HiveField(2) String? subtitle,
       @HiveField(3) DateTime createdAt,
-      @HiveField(4) DateTime dueDate,
+      @HiveField(4) DateTime? dueDate,
       @HiveField(5) DateTime? completedAt,
-      @HiveField(6) String categoryId,
-      @HiveField(7) int priority,
-      @HiveField(8) bool isCompleted,
-      @HiveField(9) List<SubTaskModel> subTasks});
+      @HiveField(6) String? categoryId,
+      @HiveField(7) int? priority,
+      @HiveField(8) bool? isCompleted,
+      @HiveField(9) List<SubTaskModel>? subTasks});
 }
 
 /// @nodoc
@@ -88,12 +88,12 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
     Object? title = null,
     Object? subtitle = freezed,
     Object? createdAt = null,
-    Object? dueDate = null,
+    Object? dueDate = freezed,
     Object? completedAt = freezed,
-    Object? categoryId = null,
-    Object? priority = null,
-    Object? isCompleted = null,
-    Object? subTasks = null,
+    Object? categoryId = freezed,
+    Object? priority = freezed,
+    Object? isCompleted = freezed,
+    Object? subTasks = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -112,30 +112,30 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      dueDate: null == dueDate
+      dueDate: freezed == dueDate
           ? _value.dueDate
           : dueDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       completedAt: freezed == completedAt
           ? _value.completedAt
           : completedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      categoryId: null == categoryId
+      categoryId: freezed == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
-              as String,
-      priority: null == priority
+              as String?,
+      priority: freezed == priority
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
-              as int,
-      isCompleted: null == isCompleted
+              as int?,
+      isCompleted: freezed == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
-              as bool,
-      subTasks: null == subTasks
+              as bool?,
+      subTasks: freezed == subTasks
           ? _value.subTasks
           : subTasks // ignore: cast_nullable_to_non_nullable
-              as List<SubTaskModel>,
+              as List<SubTaskModel>?,
     ) as $Val);
   }
 }
@@ -153,12 +153,12 @@ abstract class _$$TaskModelImplCopyWith<$Res>
       @HiveField(1) String title,
       @HiveField(2) String? subtitle,
       @HiveField(3) DateTime createdAt,
-      @HiveField(4) DateTime dueDate,
+      @HiveField(4) DateTime? dueDate,
       @HiveField(5) DateTime? completedAt,
-      @HiveField(6) String categoryId,
-      @HiveField(7) int priority,
-      @HiveField(8) bool isCompleted,
-      @HiveField(9) List<SubTaskModel> subTasks});
+      @HiveField(6) String? categoryId,
+      @HiveField(7) int? priority,
+      @HiveField(8) bool? isCompleted,
+      @HiveField(9) List<SubTaskModel>? subTasks});
 }
 
 /// @nodoc
@@ -178,12 +178,12 @@ class __$$TaskModelImplCopyWithImpl<$Res>
     Object? title = null,
     Object? subtitle = freezed,
     Object? createdAt = null,
-    Object? dueDate = null,
+    Object? dueDate = freezed,
     Object? completedAt = freezed,
-    Object? categoryId = null,
-    Object? priority = null,
-    Object? isCompleted = null,
-    Object? subTasks = null,
+    Object? categoryId = freezed,
+    Object? priority = freezed,
+    Object? isCompleted = freezed,
+    Object? subTasks = freezed,
   }) {
     return _then(_$TaskModelImpl(
       id: null == id
@@ -202,30 +202,30 @@ class __$$TaskModelImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      dueDate: null == dueDate
+      dueDate: freezed == dueDate
           ? _value.dueDate
           : dueDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       completedAt: freezed == completedAt
           ? _value.completedAt
           : completedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      categoryId: null == categoryId
+      categoryId: freezed == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
-              as String,
-      priority: null == priority
+              as String?,
+      priority: freezed == priority
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
-              as int,
-      isCompleted: null == isCompleted
+              as int?,
+      isCompleted: freezed == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
-              as bool,
-      subTasks: null == subTasks
+              as bool?,
+      subTasks: freezed == subTasks
           ? _value._subTasks
           : subTasks // ignore: cast_nullable_to_non_nullable
-              as List<SubTaskModel>,
+              as List<SubTaskModel>?,
     ));
   }
 }
@@ -238,12 +238,12 @@ class _$TaskModelImpl extends _TaskModel {
       @HiveField(1) required this.title,
       @HiveField(2) this.subtitle,
       @HiveField(3) required this.createdAt,
-      @HiveField(4) required this.dueDate,
+      @HiveField(4) this.dueDate,
       @HiveField(5) this.completedAt,
-      @HiveField(6) required this.categoryId,
-      @HiveField(7) this.priority = 1,
-      @HiveField(8) this.isCompleted = false,
-      @HiveField(9) final List<SubTaskModel> subTasks = const []})
+      @HiveField(6) this.categoryId,
+      @HiveField(7) this.priority,
+      @HiveField(8) this.isCompleted,
+      @HiveField(9) final List<SubTaskModel>? subTasks})
       : _subTasks = subTasks,
         super._();
 
@@ -264,29 +264,28 @@ class _$TaskModelImpl extends _TaskModel {
   final DateTime createdAt;
   @override
   @HiveField(4)
-  final DateTime dueDate;
+  final DateTime? dueDate;
   @override
   @HiveField(5)
   final DateTime? completedAt;
   @override
   @HiveField(6)
-  final String categoryId;
+  final String? categoryId;
   @override
-  @JsonKey()
   @HiveField(7)
-  final int priority;
+  final int? priority;
   @override
-  @JsonKey()
   @HiveField(8)
-  final bool isCompleted;
-  final List<SubTaskModel> _subTasks;
+  final bool? isCompleted;
+  final List<SubTaskModel>? _subTasks;
   @override
-  @JsonKey()
   @HiveField(9)
-  List<SubTaskModel> get subTasks {
+  List<SubTaskModel>? get subTasks {
+    final value = _subTasks;
+    if (value == null) return null;
     if (_subTasks is EqualUnmodifiableListView) return _subTasks;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_subTasks);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -354,12 +353,12 @@ abstract class _TaskModel extends TaskModel {
       @HiveField(1) required final String title,
       @HiveField(2) final String? subtitle,
       @HiveField(3) required final DateTime createdAt,
-      @HiveField(4) required final DateTime dueDate,
+      @HiveField(4) final DateTime? dueDate,
       @HiveField(5) final DateTime? completedAt,
-      @HiveField(6) required final String categoryId,
-      @HiveField(7) final int priority,
-      @HiveField(8) final bool isCompleted,
-      @HiveField(9) final List<SubTaskModel> subTasks}) = _$TaskModelImpl;
+      @HiveField(6) final String? categoryId,
+      @HiveField(7) final int? priority,
+      @HiveField(8) final bool? isCompleted,
+      @HiveField(9) final List<SubTaskModel>? subTasks}) = _$TaskModelImpl;
   const _TaskModel._() : super._();
 
   factory _TaskModel.fromJson(Map<String, dynamic> json) =
@@ -379,22 +378,22 @@ abstract class _TaskModel extends TaskModel {
   DateTime get createdAt;
   @override
   @HiveField(4)
-  DateTime get dueDate;
+  DateTime? get dueDate;
   @override
   @HiveField(5)
   DateTime? get completedAt;
   @override
   @HiveField(6)
-  String get categoryId;
+  String? get categoryId;
   @override
   @HiveField(7)
-  int get priority;
+  int? get priority;
   @override
   @HiveField(8)
-  bool get isCompleted;
+  bool? get isCompleted;
   @override
   @HiveField(9)
-  List<SubTaskModel> get subTasks;
+  List<SubTaskModel>? get subTasks;
 
   /// Create a copy of TaskModel
   /// with the given fields replaced by the non-null parameter values.

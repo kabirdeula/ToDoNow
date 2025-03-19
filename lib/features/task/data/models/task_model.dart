@@ -15,12 +15,12 @@ class TaskModel with _$TaskModel {
     @HiveField(1) required String title,
     @HiveField(2) String? subtitle,
     @HiveField(3) required DateTime createdAt,
-    @HiveField(4) required DateTime dueDate,
+    @HiveField(4) DateTime? dueDate,
     @HiveField(5) DateTime? completedAt,
-    @HiveField(6) required String categoryId,
-    @HiveField(7) @Default(1) int priority,
-    @HiveField(8) @Default(false) bool isCompleted,
-    @HiveField(9) @Default([]) List<SubTaskModel> subTasks,
+    @HiveField(6) String? categoryId,
+    @HiveField(7) int? priority,
+    @HiveField(8) bool? isCompleted,
+    @HiveField(9) List<SubTaskModel>? subTasks,
   }) = _TaskModel;
 
   factory TaskModel.fromJson(Map<String, dynamic> json) =>
@@ -37,7 +37,7 @@ class TaskModel with _$TaskModel {
       categoryId: entity.categoryId,
       priority: entity.priority,
       isCompleted: entity.isCompleted,
-      subTasks: entity.subtasks
+      subTasks: entity.subtasks!
           .map((e) => SubTaskModel(
                 id: e.id,
                 title: e.title,
@@ -58,7 +58,7 @@ class TaskModel with _$TaskModel {
       categoryId: categoryId,
       priority: priority,
       isCompleted: isCompleted,
-      subtasks: subTasks
+      subtasks: subTasks!
           .map((e) => SubTaskEntity(
                 id: e.id,
                 title: e.title,

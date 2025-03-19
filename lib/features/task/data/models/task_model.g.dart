@@ -21,12 +21,12 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       title: fields[1] as String,
       subtitle: fields[2] as String?,
       createdAt: fields[3] as DateTime,
-      dueDate: fields[4] as DateTime,
+      dueDate: fields[4] as DateTime?,
       completedAt: fields[5] as DateTime?,
-      categoryId: fields[6] as String,
-      priority: fields[7] as int,
-      isCompleted: fields[8] as bool,
-      subTasks: (fields[9] as List).cast<SubTaskModel>(),
+      categoryId: fields[6] as String?,
+      priority: fields[7] as int?,
+      isCompleted: fields[8] as bool?,
+      subTasks: (fields[9] as List?)?.cast<SubTaskModel>(),
     );
   }
 
@@ -117,17 +117,18 @@ _$TaskModelImpl _$$TaskModelImplFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       subtitle: json['subtitle'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
-      dueDate: DateTime.parse(json['dueDate'] as String),
+      dueDate: json['dueDate'] == null
+          ? null
+          : DateTime.parse(json['dueDate'] as String),
       completedAt: json['completedAt'] == null
           ? null
           : DateTime.parse(json['completedAt'] as String),
-      categoryId: json['categoryId'] as String,
-      priority: (json['priority'] as num?)?.toInt() ?? 1,
-      isCompleted: json['isCompleted'] as bool? ?? false,
+      categoryId: json['categoryId'] as String?,
+      priority: (json['priority'] as num?)?.toInt(),
+      isCompleted: json['isCompleted'] as bool?,
       subTasks: (json['subTasks'] as List<dynamic>?)
-              ?.map((e) => SubTaskModel.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
+          ?.map((e) => SubTaskModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$TaskModelImplToJson(_$TaskModelImpl instance) =>
@@ -136,7 +137,7 @@ Map<String, dynamic> _$$TaskModelImplToJson(_$TaskModelImpl instance) =>
       'title': instance.title,
       'subtitle': instance.subtitle,
       'createdAt': instance.createdAt.toIso8601String(),
-      'dueDate': instance.dueDate.toIso8601String(),
+      'dueDate': instance.dueDate?.toIso8601String(),
       'completedAt': instance.completedAt?.toIso8601String(),
       'categoryId': instance.categoryId,
       'priority': instance.priority,

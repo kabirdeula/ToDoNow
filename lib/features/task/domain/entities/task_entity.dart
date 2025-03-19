@@ -9,12 +9,12 @@ class TaskEntity with _$TaskEntity {
     required String title,
     String? subtitle,
     required DateTime createdAt,
-    required DateTime dueDate,
+    DateTime? dueDate,
     DateTime? completedAt,
-    required String categoryId,
-    required int priority,
-    required bool isCompleted,
-    required List<SubTaskEntity> subtasks,
+    String? categoryId,
+    int? priority,
+    bool? isCompleted,
+    List<SubTaskEntity>? subtasks,
   }) = _TaskEntity;
 }
 
