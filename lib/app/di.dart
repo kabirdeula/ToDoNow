@@ -74,4 +74,28 @@ void setupUsecaseInjection() {
   sl.registerLazySingleton<RegisterUsecase>(
     () => RegisterUsecase(),
   );
+
+  sl.registerLazySingleton<AddTaskUsecase>(
+    () => AddTaskUsecase(),
+  );
+
+  sl.registerLazySingleton<DeleteAllTasksUsecase>(
+    () => DeleteAllTasksUsecase(),
+  );
+
+  sl.registerLazySingleton<DeleteSelectedTasksUsecase>(
+    () => DeleteSelectedTasksUsecase(),
+  );
+
+  sl.registerLazySingleton<DeleteTaskUsecase>(
+    () => DeleteTaskUsecase(),
+  );
+
+  sl.registerLazySingleton<GetTaskUsecase>(
+    () => GetTaskUsecase(),
+  );
+
+  sl.registerLazySingleton<SaveTaskUsecase>(
+    () => SaveTaskUsecase(),
+  );
 }

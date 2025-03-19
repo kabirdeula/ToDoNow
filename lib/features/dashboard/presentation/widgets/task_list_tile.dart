@@ -56,7 +56,7 @@ class TaskListTile extends StatelessWidget {
                         context.read<TaskCubit>().toggleSelection(id);
                         break;
                       case 'delete':
-                        context.read<TaskCubit>().deleteTask(task);
+                        // context.read<TaskCubit>().deleteTask(task);
                         break;
                     }
                   },

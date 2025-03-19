@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/core.dart';
+import '/core/core.dart';
+import '../../../home/home.dart';
 import '../../../profile/profile.dart';
 import '../../dashboard.dart';
 
