@@ -13,6 +13,19 @@ class TaskListView extends StatelessWidget {
     return BlocBuilder<TaskCubit, TaskState>(
       builder: (context, state) {
         return state.maybeWhen(
+          loaded: (tasks, isSelectionMode) => ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: tasks.length,
+            itemBuilder: (context, index) => TaskListTile(
+              title: tasks[index].title,
+              isSelectionMode: isSelectionMode,
+              value: false,
+              id: tasks[index].id,
+              task: TaskModel.fromEntity(tasks[index]),
+              time: tasks[index].createdAt,
+            ),
+          ),
           grouped: (groupedTask) {
             final entries = groupedTask.entries.toList();
             return ListView.builder(
