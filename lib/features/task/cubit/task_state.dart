@@ -12,5 +12,7 @@ class TaskState with _$TaskState {
     required List<TaskEntity> tasks,
     @Default(false) bool isSelectionMode,
   }) = _Loaded;
+  const factory TaskState.grouped(
+      {required Map<String, List<TaskEntity>> tasks}) = _Grouped;
   const factory TaskState.error(String error) = _Error;
 }

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../app/di.dart';
+import '../../../core/core.dart';
 import '../task.dart';
 
 class TaskCubit extends Cubit<TaskState> {
@@ -25,10 +26,13 @@ class TaskCubit extends Cubit<TaskState> {
   }
 
   Future<void> loadTasks() async {
+    log.d("(Task Cubit) Task Loading");
     emit(TaskState.loading());
     try {
       final tasks = await _getTask.call();
       emit(TaskState.loaded(tasks: tasks));
+      log.d("(Task Cubit) Task Loaded Successfully");
+      groupTasks();
     } catch (e) {
       emit(TaskState.error(e.toString()));
     }
@@ -112,5 +116,47 @@ class TaskCubit extends Cubit<TaskState> {
         orElse: () async => emit(TaskState.initial()),
       );
     }
+  }
+
+  Future<void> groupTasks() async {
+    log.d("(Task Cubit) Grouping tasks...");
+    state.maybeWhen(
+      loaded: (tasks, isSelectionMode) async {
+        log.d("(Task Cubit) Grouping tasks... ${tasks.length} tasks found.");
+        final now = DateTime.now();
+        final today = DateTime(now.year, now.month, now.day);
+        final yesterday = today.subtract(Duration(days: 1));
+
+        final Map<String, List<TaskEntity>> groupedTasks = {
+          "Today": [],
+          "Yesterday": [],
+          "Upcoming": [],
+          "Overdue": [],
+          "Completed": []
+        };
+
+        for (var task in tasks) {
+          if (task.completedAt != null) {
+            groupedTasks["Completed"]!.add(task);
+          } else if (task.createdAt.isAfter(today)) {
+            groupedTasks["Today"]!.add(task);
+          } else if (task.createdAt.isAfter(yesterday) &&
+              task.createdAt.isBefore(today)) {
+            groupedTasks["Yesterday"]!.add(task);
+          } else if (task.dueDate != null && task.dueDate!.isAfter(now)) {
+            groupedTasks["Upcoming"]!.add(task);
+          } else if (task.dueDate != null && task.dueDate!.isBefore(now)) {
+            groupedTasks["Overdue"]!.add(task);
+          }
+        }
+
+        emit(TaskState.grouped(tasks: groupedTasks));
+        log.d("(Task Cubit) Grouping tasks... done.");
+      },
+      orElse: () async {
+        log.w("(Task Cubit) Failed grouping task");
+        emit(TaskState.initial());
+      },
+    );
   }
 }

@@ -22,6 +22,7 @@ mixin _$TaskState {
     required TResult Function() loading,
     required TResult Function(List<TaskEntity> tasks, bool isSelectionMode)
         loaded,
+    required TResult Function(Map<String, List<TaskEntity>> tasks) grouped,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,6 +31,7 @@ mixin _$TaskState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<TaskEntity> tasks, bool isSelectionMode)? loaded,
+    TResult? Function(Map<String, List<TaskEntity>> tasks)? grouped,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -38,6 +40,7 @@ mixin _$TaskState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<TaskEntity> tasks, bool isSelectionMode)? loaded,
+    TResult Function(Map<String, List<TaskEntity>> tasks)? grouped,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -47,6 +50,7 @@ mixin _$TaskState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Grouped value) grouped,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +59,7 @@ mixin _$TaskState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Grouped value)? grouped,
     TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -63,6 +68,7 @@ mixin _$TaskState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Grouped value)? grouped,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -134,6 +140,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(List<TaskEntity> tasks, bool isSelectionMode)
         loaded,
+    required TResult Function(Map<String, List<TaskEntity>> tasks) grouped,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -145,6 +152,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<TaskEntity> tasks, bool isSelectionMode)? loaded,
+    TResult? Function(Map<String, List<TaskEntity>> tasks)? grouped,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -156,6 +164,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<TaskEntity> tasks, bool isSelectionMode)? loaded,
+    TResult Function(Map<String, List<TaskEntity>> tasks)? grouped,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -171,6 +180,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Grouped value) grouped,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -182,6 +192,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Grouped value)? grouped,
     TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -193,6 +204,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Grouped value)? grouped,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -252,6 +264,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() loading,
     required TResult Function(List<TaskEntity> tasks, bool isSelectionMode)
         loaded,
+    required TResult Function(Map<String, List<TaskEntity>> tasks) grouped,
     required TResult Function(String error) error,
   }) {
     return loading();
@@ -263,6 +276,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<TaskEntity> tasks, bool isSelectionMode)? loaded,
+    TResult? Function(Map<String, List<TaskEntity>> tasks)? grouped,
     TResult? Function(String error)? error,
   }) {
     return loading?.call();
@@ -274,6 +288,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<TaskEntity> tasks, bool isSelectionMode)? loaded,
+    TResult Function(Map<String, List<TaskEntity>> tasks)? grouped,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -289,6 +304,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Grouped value) grouped,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -300,6 +316,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Grouped value)? grouped,
     TResult? Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -311,6 +328,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Grouped value)? grouped,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -416,6 +434,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function() loading,
     required TResult Function(List<TaskEntity> tasks, bool isSelectionMode)
         loaded,
+    required TResult Function(Map<String, List<TaskEntity>> tasks) grouped,
     required TResult Function(String error) error,
   }) {
     return loaded(tasks, isSelectionMode);
@@ -427,6 +446,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<TaskEntity> tasks, bool isSelectionMode)? loaded,
+    TResult? Function(Map<String, List<TaskEntity>> tasks)? grouped,
     TResult? Function(String error)? error,
   }) {
     return loaded?.call(tasks, isSelectionMode);
@@ -438,6 +458,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<TaskEntity> tasks, bool isSelectionMode)? loaded,
+    TResult Function(Map<String, List<TaskEntity>> tasks)? grouped,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -453,6 +474,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Grouped value) grouped,
     required TResult Function(_Error value) error,
   }) {
     return loaded(this);
@@ -464,6 +486,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Grouped value)? grouped,
     TResult? Function(_Error value)? error,
   }) {
     return loaded?.call(this);
@@ -475,6 +498,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Grouped value)? grouped,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -497,6 +521,173 @@ abstract class _Loaded implements TaskState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GroupedImplCopyWith<$Res> {
+  factory _$$GroupedImplCopyWith(
+          _$GroupedImpl value, $Res Function(_$GroupedImpl) then) =
+      __$$GroupedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Map<String, List<TaskEntity>> tasks});
+}
+
+/// @nodoc
+class __$$GroupedImplCopyWithImpl<$Res>
+    extends _$TaskStateCopyWithImpl<$Res, _$GroupedImpl>
+    implements _$$GroupedImplCopyWith<$Res> {
+  __$$GroupedImplCopyWithImpl(
+      _$GroupedImpl _value, $Res Function(_$GroupedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TaskState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tasks = null,
+  }) {
+    return _then(_$GroupedImpl(
+      tasks: null == tasks
+          ? _value._tasks
+          : tasks // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<TaskEntity>>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GroupedImpl implements _Grouped {
+  const _$GroupedImpl({required final Map<String, List<TaskEntity>> tasks})
+      : _tasks = tasks;
+
+  final Map<String, List<TaskEntity>> _tasks;
+  @override
+  Map<String, List<TaskEntity>> get tasks {
+    if (_tasks is EqualUnmodifiableMapView) return _tasks;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_tasks);
+  }
+
+  @override
+  String toString() {
+    return 'TaskState.grouped(tasks: $tasks)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GroupedImpl &&
+            const DeepCollectionEquality().equals(other._tasks, _tasks));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_tasks));
+
+  /// Create a copy of TaskState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GroupedImplCopyWith<_$GroupedImpl> get copyWith =>
+      __$$GroupedImplCopyWithImpl<_$GroupedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<TaskEntity> tasks, bool isSelectionMode)
+        loaded,
+    required TResult Function(Map<String, List<TaskEntity>> tasks) grouped,
+    required TResult Function(String error) error,
+  }) {
+    return grouped(tasks);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<TaskEntity> tasks, bool isSelectionMode)? loaded,
+    TResult? Function(Map<String, List<TaskEntity>> tasks)? grouped,
+    TResult? Function(String error)? error,
+  }) {
+    return grouped?.call(tasks);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<TaskEntity> tasks, bool isSelectionMode)? loaded,
+    TResult Function(Map<String, List<TaskEntity>> tasks)? grouped,
+    TResult Function(String error)? error,
+    required TResult orElse(),
+  }) {
+    if (grouped != null) {
+      return grouped(tasks);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Grouped value) grouped,
+    required TResult Function(_Error value) error,
+  }) {
+    return grouped(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Grouped value)? grouped,
+    TResult? Function(_Error value)? error,
+  }) {
+    return grouped?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Grouped value)? grouped,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (grouped != null) {
+      return grouped(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Grouped implements TaskState {
+  const factory _Grouped({required final Map<String, List<TaskEntity>> tasks}) =
+      _$GroupedImpl;
+
+  Map<String, List<TaskEntity>> get tasks;
+
+  /// Create a copy of TaskState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GroupedImplCopyWith<_$GroupedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -572,6 +763,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function() loading,
     required TResult Function(List<TaskEntity> tasks, bool isSelectionMode)
         loaded,
+    required TResult Function(Map<String, List<TaskEntity>> tasks) grouped,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -583,6 +775,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<TaskEntity> tasks, bool isSelectionMode)? loaded,
+    TResult? Function(Map<String, List<TaskEntity>> tasks)? grouped,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -594,6 +787,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<TaskEntity> tasks, bool isSelectionMode)? loaded,
+    TResult Function(Map<String, List<TaskEntity>> tasks)? grouped,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -609,6 +803,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Grouped value) grouped,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -620,6 +815,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Grouped value)? grouped,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -631,6 +827,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Grouped value)? grouped,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

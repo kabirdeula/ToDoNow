@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../routes/routes.dart';
-import '../../../dashboard/dashboard.dart';
 import '../../../task/task.dart';
 import '../../home.dart';
 
@@ -39,73 +37,20 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: RefreshIndicator(
-        onRefresh: () => context.read<TaskCubit>().loadTasks(),
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(title: Text('Index')),
-            SliverPersistentHeader(
-              delegate: HomeSearchBar(controller: _searchController),
-            ),
-            BlocBuilder<TaskCubit, TaskState>(
-              builder: (context, state) {
-                return state.maybeWhen(
-                    loaded: (tasks, isSelectionMode) {
-                      return _displayTaskList(
-                        context,
-                        tasks,
-                        isSelectionMode,
-                      );
-                    },
-                    orElse: () =>
-                        const SliverFillRemaining(child: EmptyHomeScreen()));
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _displayTaskList(
-    BuildContext context,
-    List<TaskEntity> tasks,
-    bool isSelectionMode,
-  ) {
-    if (tasks.isEmpty) {
-      return const SliverFillRemaining(child: EmptyHomeScreen());
-    }
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          final task = tasks[index];
-          final taskModel = TaskModel.fromEntity(task);
-          final isSelected = isSelectionMode;
-
-          return Padding(
+      appBar: AppBar(title: Text("Index")),
+      body: SingleChildScrollView(
+        child: RefreshIndicator(
+          onRefresh: () => context.read<TaskCubit>().loadTasks(),
+          child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: GestureDetector(
-              onLongPress: () =>
-                  context.read<TaskCubit>().toggleSelection(task.id),
-              onTap: () {
-                if (isSelectionMode) {
-                  context.read<TaskCubit>().toggleSelection(task.id);
-                } else {
-                  context.push(AppRoutes.taskScreen.path);
-                }
-              },
-              child: TaskListTile(
-                title: task.title,
-                isSelectionMode: isSelectionMode,
-                value: isSelected,
-                id: task.id,
-                task: taskModel,
-                time: task.createdAt,
-              ),
+            child: Column(
+              children: [
+                HomeSearchBar(controller: _searchController),
+                TaskListView(),
+              ],
             ),
-          );
-        },
-        childCount: tasks.length,
+          ),
+        ),
       ),
     );
   }
