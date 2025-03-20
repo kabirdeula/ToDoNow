@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/core.dart';
+import '../../../dashboard/dashboard.dart';
 import '../../../home/home.dart';
 import '../../task.dart';
 
@@ -25,13 +25,29 @@ class TaskListView extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ListTile(
-                      title: Text(entry.key, style: AppTypography.headline3()),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 8.0),
+                      margin: const EdgeInsets.symmetric(vertical: 8.0),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade800,
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Text(entry.key),
                     ),
-                    ...entry.value.map((task) => ListTile(
-                          title: Text(task.title),
-                          leading: Icon(Icons.task_alt),
-                        ))
+                    ...entry.value.map(
+                      (task) {
+                        final taskModel = TaskModel.fromEntity(task);
+                        return TaskListTile(
+                          title: task.title,
+                          isSelectionMode: false,
+                          value: true,
+                          id: '',
+                          task: taskModel,
+                          time: task.createdAt,
+                        );
+                      },
+                    )
                   ],
                 );
               },
