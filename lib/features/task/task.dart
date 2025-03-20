@@ -14,3 +14,4 @@ export './domain/usecase/get_task_usecase.dart';
 export './domain/usecase/save_task_usecase.dart';
 export './presentation/screens/task_screen.dart';
 export './presentation/widgets/add_task.dart';
+export './presentation/widgets/task_list_view.dart';
