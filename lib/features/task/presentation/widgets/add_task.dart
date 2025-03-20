@@ -5,6 +5,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../../../core/core.dart';
 import '../../../../routes/routes.dart';
+import '../../../category/category.dart';
 import '../../task.dart';
 
 void addTask(BuildContext context) {
@@ -42,22 +43,25 @@ void addTask(BuildContext context) {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // spacing: 24.0,
-                  // children: [
-                  // IconButton(
-                  // icon: Icon(Icons.timer_outlined),
-                  // onPressed: () async {
-                  // DateTime? pickedDateTime =
-                  // await _pickDateTime(context);
-                  // selectedDateTime = pickedDateTime ?? DateTime.now();
-                  // },
-                  // ),
-                  // Icon(Icons.sell_outlined),
-                  // Icon(Icons.flag_outlined),
-                  // ],
-                  // ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    spacing: 24.0,
+                    children: [
+                      // IconButton(
+                      // icon: Icon(Icons.timer_outlined),
+                      // onPressed: () async {
+                      // DateTime? pickedDateTime =
+                      // await _pickDateTime(context);
+                      // selectedDateTime = pickedDateTime ?? DateTime.now();
+                      // },
+                      // ),
+                      // Icon(Icons.sell_outlined),
+                      IconButton(
+                        icon: Icon(Icons.flag_outlined),
+                        onPressed: () => chooseCategory(context),
+                      )
+                    ],
+                  ),
                   IconButton(
                     onPressed: () {
                       var uuid = Uuid();
